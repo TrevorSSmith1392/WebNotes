@@ -40,54 +40,71 @@ function record(inputBuffer) {
 function exportWAV(type) {
     var bufferL = mergeBuffers(recBuffersL, recLength);
     var bufferR = mergeBuffers(recBuffersR, recLength);
+
+    //Float32Array
     var interleaved = interleave(bufferL, bufferR);
 
-    
-    
+
     /////////////////TESTS
     /*
-    var wavStart = startWav();
-
+    
     //number of floats in interleaved audio stream
     var iSize = interleaved.length;
 
-    
-    var chunkArray = new Array(iSize / 1024);
+    //an array intended to contain float32s in chunks of 1024
+    var chunkArray = new Array(iSize/1024 + 1);//1024 isn't meaningful here
 
+    //this is intended to be how many float32s there are
+    var contentChunkSize32Float = 0;
 
     for (var i = 0; i < chunkArray.length; i++) {
 
-        var buffer = new ArrayBuffer(1024 * 32);
+        //float32s
+        var source = interleaved.subarray(i * 1024, i * 1024 + 1024);
+
+        //an array buffer which holds bytes
+        var buffer = new ArrayBuffer(source.length * 2);
         var view = new DataView(buffer);
 
-        var source = interleaved.subarray(i*1024, i * 1024 + 1024);
-
         chunkArray[i] = makePCMChunk(view, source);
+
+        //need to keep count of content size chunk
+        contentChunkSize32Float += view.byteLength / 2;
     }
 
+    //zero confidence this is the right size
+    var wavStart = startWav(contentChunkSize32Float);
 
     var audioBlob = new Blob([wavStart, chunkArray[0]]);
     for (var i = 1; i < chunkArray.length; i++){
         audioBlob = new Blob([audioBlob, chunkArray[i]], {type:type});
     };
+    
     */
     ////////////////////END
+
+
+    //--------------NORMAL
 
     var dataview = encodeWAV(interleaved);
     var audioBlob = new Blob([dataview], { type: type });
 
+    //---------------End
 
-    /////////////Half tests
+
+    /////////////Half tests   -- working, need to modify length and see what happens
+
     /*
-
     var buffer = new ArrayBuffer(interleaved.length * 2);
     var view = new DataView(buffer);
 
-    floatTo16BitPCM(view, 0, interleaved);
+    makePCMChunk(view, interleaved);
 
-    var audioBlob = new Blob([startWav, view], { type: type });
+    var wavStart = startWav(view.byteLength / 2);
 
+    var audioBlob = new Blob([wavStart, view], { type: type });
     */
+
     //////////////////////end
 
 
@@ -142,11 +159,14 @@ function floatTo16BitPCM(output, offset, input) {
 
 //preallocate ArrayBuffer before calling, becareful about memory leaks.
 function makePCMChunk(view, input) {
+    //view is view of ArrayBuffer(bytes)
+    //input is Float32Array
     var offset = 0;
     for (var i = 0; i < input.length; i++, offset += 2) {
         //postMessage(i+": "+offset );
         var s = Math.max(-1, Math.min(1, input[i]));
         view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+        //we are taking Float32s and making a Int16 With them
     }
 }
 
@@ -186,14 +206,14 @@ function encodeWAV(samples) {
     /* data chunk identifier */
     writeString(view, 36, 'data');
     /* data chunk length */
-    view.setUint32(40, 32, true);
+    view.setUint32(40, samples.length * 2, true);
 
     floatTo16BitPCM(view, 44, samples);
 
     return view;
 }
 
-function startWav() {
+function startWav(fileSizeFloat32) {
     var buffer = new ArrayBuffer(44);
     var view = new DataView(buffer);
     
@@ -202,7 +222,7 @@ function startWav() {
 
 
     //may have to write file length at the end
-    view.setUint32(4, 9999, true);/* file length */
+    view.setUint32(4, 32 + fileSizeFloat32 * 2, true);/* file length */
     writeString(view, 8, 'WAVE');/* RIFF type */
     writeString(view, 12, 'fmt ');/* format chunk identifier */
     view.setUint32(16, 16, true);/* format chunk length */
@@ -213,6 +233,6 @@ function startWav() {
     view.setUint16(32, 4, true);/* block align (channel count * bytes per sample) */
     view.setUint16(34, 16, true);/* bits per sample */
     writeString(view, 36, 'data');/* data chunk identifier */
-    view.setUint32(40, 32, true);/* data chunk length */
+    view.setUint32(40, fileSizeFloat32 * 2, true);/* data chunk length */
     return view;
 }
