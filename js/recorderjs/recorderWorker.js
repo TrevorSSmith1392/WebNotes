@@ -37,17 +37,40 @@ function exportWAV(type) {
     var bufferL = mergeBuffers(recBuffersL, recLength);
     var bufferR = mergeBuffers(recBuffersR, recLength);
     var interleaved = interleave(bufferL, bufferR);
+   
+    //*
+    //number of floats in interleaved audio stream
+    var iSize = interleaved.length;
 
-    /* original
-    var dataview = encodeWAV(interleaved);
-    var audioBlob = new Blob([dataview], { type: type });
-    */
+    //an array intended to contain float32s in chunks of 1024
+    var chunkArray = new Array(iSize / 1024 + 1);//1024 isn't meaningful here
 
-    var buffer = new ArrayBuffer(interleaved.length * 2);
-    var view = new DataView(buffer);
-    makePCMChunk(view, interleaved);
-    var wavStart = startWav(view.byteLength / 2);
-    var audioBlob = new Blob([wavStart, view], { type: type });
+    //this is intended to be how many float32s there are
+    var contentChunkSize32Float = 0;
+
+    for (var i = 0; i < chunkArray.length; i++) {
+
+        //float32s
+        var source = interleaved.subarray(i * 1024, i * 1024 + 1024);
+
+        //an array buffer which holds bytes
+        var buffer = new ArrayBuffer(source.length * 2);
+        var view = new DataView(buffer);
+
+        chunkArray[i] = makePCMChunk(view, source);
+
+        //need to keep count of content size chunk
+        contentChunkSize32Float += 1024;
+    }
+
+    //zero confidence this is the right size
+    var wavStart = startWav(contentChunkSize32Float);
+
+    var audioBlob = new Blob([wavStart, chunkArray[0]]);
+    for (var i = 1; i < chunkArray.length; i++) {
+        audioBlob = new Blob([audioBlob, chunkArray[i]], { type: type });
+    };
+    /**/
 
     this.postMessage(audioBlob);
 }
@@ -177,6 +200,14 @@ function startWav(fileSizeFloat32) {
     view.setUint32(40, fileSizeFloat32 * 2, true);/* data chunk length */
     return view;
 }
+
+
+
+
+
+
+
+
 
 
     /////////////////TESTS
