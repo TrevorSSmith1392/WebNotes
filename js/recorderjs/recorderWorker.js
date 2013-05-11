@@ -37,13 +37,31 @@ function exportWAV(type) {
     var bufferL = mergeBuffers(recBuffersL, recLength);
     var bufferR = mergeBuffers(recBuffersR, recLength);
     var interleaved = interleave(bufferL, bufferR);
+
+
+    /*
+    var buffer = new ArrayBuffer(interleaved.length * 2);
+    var view = new DataView(buffer);
+
+    makePCMChunk(view, interleaved);
+
+    var piece = interleaved.subarray(0, 1024 * 1024);
+    var pieceBuffer = new ArrayBuffer(piece.length * 2);
+    var pieceView = new DataView(pieceBuffer);
+    convertToPCM(pieceView, piece);
+     
+    //var wavStart = startWav(view.byteLength / 2); //var wavStart = startWav(1024 * 1024 * 10); 
+    var wavStart = startWav(interleaved.length * 2 + 1024 * 1024);
+    
+    var audioBlob = new Blob([wavStart, view, pieceView, view], { type: type });
+    //*/
    
     //*
     //number of floats in interleaved audio stream
     var iSize = interleaved.length;
 
     //an array intended to contain float32s in chunks of 1024
-    var chunkArray = new Array(iSize / 1024 + 1);//1024 isn't meaningful here
+    var chunkArray = new Array(iSize / 1024);//1024 isn't meaningful here
 
     //this is intended to be how many float32s there are
     var contentChunkSize32Float = 0;
@@ -57,7 +75,10 @@ function exportWAV(type) {
         var buffer = new ArrayBuffer(source.length * 2);
         var view = new DataView(buffer);
 
-        chunkArray[i] = makePCMChunk(view, source);
+        convertToPCM(view, source);
+
+        //this doesn't return anything, here should be the issue
+        chunkArray[i] = view; 
 
         //need to keep count of content size chunk
         contentChunkSize32Float += 1024;
@@ -66,7 +87,7 @@ function exportWAV(type) {
     //zero confidence this is the right size
     var wavStart = startWav(contentChunkSize32Float);
 
-    var audioBlob = new Blob([wavStart, chunkArray[0]]);
+    var audioBlob = new Blob([wavStart, chunkArray[0]], { type: type });
     for (var i = 1; i < chunkArray.length; i++) {
         audioBlob = new Blob([audioBlob, chunkArray[i]], { type: type });
     };
@@ -165,7 +186,7 @@ function encodeWAV(samples) {
 
 
 //preallocate ArrayBuffer before calling, becareful about memory leaks.
-function makePCMChunk(view, input) {
+function convertToPCM(view, input) {
     //view is view of ArrayBuffer(bytes)
     //input is Float32Array
     var offset = 0;
