@@ -16,6 +16,7 @@ function errorHandler(e) {
 
 function initFS() {
 
+    //this should be navigator.webkitPersistentStorage.requestQuota(1024 * 1024 * 1024 * 20);
     window.webkitStorageInfo.requestQuota(PERSISTENT, 1024 * 1024 * 1024 * 20, function (grantedBytes) {
 
         window.requestFileSystem(PERSISTENT, grantedBytes, function (filesystem) {
