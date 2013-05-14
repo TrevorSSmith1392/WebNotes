@@ -8,11 +8,6 @@ var analyserContext = null;
 var canvasWidth, canvasHeight;
 var recIndex = 0;
 
-/* TODO:
-
-- offer mono option
-- "Monitor input" switch
-*/
 
 function saveAudio() {
     audioRecorder.exportWAV(doneEncoding);
@@ -41,34 +36,10 @@ function toggleRecording(e) {
             return;
         e.classList.add("recording");
         audioRecorder.clear();
+        audioRecorder.beginFile("testfile.wav");
         audioRecorder.record();
     }
 }
-
-// this is a helper function to force mono for some interfaces that return a stereo channel for a mono source.
-// it's not currently used, but probably will be in the future.
-function convertToMono(input) {
-    var splitter = audioContext.createChannelSplitter(2);
-    var merger = audioContext.createChannelMerger(2);
-
-    input.connect(splitter);
-    splitter.connect(merger, 0, 0);
-    splitter.connect(merger, 0, 1);
-    return merger;
-}
-function toggleMono() {
-    if (audioInput != realAudioInput) {
-        audioInput.disconnect();
-        realAudioInput.disconnect();
-        audioInput = realAudioInput;
-    } else {
-        realAudioInput.disconnect();
-        audioInput = convertToMono(realAudioInput);
-    }
-
-    audioInput.connect(inputPoint);
-}
-
 
 function cancelAnalyserUpdates() {
     window.webkitCancelAnimationFrame(rafID);
@@ -123,7 +94,6 @@ function gotStream(stream) {
     audioInput = realAudioInput;
     audioInput.connect(inputPoint);
 
-    //    audioInput = convertToMono( input );
 
     analyserNode = audioContext.createAnalyser();
     analyserNode.fftSize = 2048;

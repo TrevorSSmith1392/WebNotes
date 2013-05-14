@@ -14,6 +14,15 @@
                 sampleRate: this.context.sampleRate
             }
         });
+
+        this.beginFile = function(filename){
+            worker.postMessage({
+                command : "beginFile",
+                filename : filename
+            });
+        }
+
+
         var recording = false,
           currCallback;
 
@@ -88,6 +97,7 @@
         click.initEvent("click", true, true);
         link.dispatchEvent(click);
     }
+
 
     window.Recorder = Recorder;
 
