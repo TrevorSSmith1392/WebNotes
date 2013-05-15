@@ -20,10 +20,14 @@ function ListCtrl($scope) {
     $scope.text;
     $scope.files = [];
 
+    $scope.deleteFile = function (fileEntry){
+        fileEntry.remove($scope.readEntries);
+    }
+
     //required due to asynch
     $scope.init = function () {
 
-        fs.root.getFile("fileBuffer.wav", {create: true}, null, errorHandler);
+        //fs.root.getFile("fileBuffer.wav", {create: true}, null, errorHandler);
 
         /*
         fs.root.getFile('log.txt', {create: true}, null, errorHandler);
@@ -87,31 +91,53 @@ function ListCtrl($scope) {
     }
 
     $scope.readEntries = function () {
+        var loop =  function (){
+            $scope.dirReader.readEntries(function (entries) {
+                if (!entries.length){
+                    //I don't like this here
+                    $scope.$apply();
+                    return;
+                }
+                //call back requires this function to use apply
+                for (var i = 0 ; i < entries.length; i++){
 
-        $scope.dirReader.readEntries(function (entries) {
-            if (!entries.length){
-                return;
-            }
-            //call back requires this function to use apply
-            for (var i = 0 ; i < entries.length; i++){
+                    newFiles.push(entries[i]);
+                }
 
-                $scope.files.push(entries[i]);
-            }
-            $scope.$apply(function ($scope) {});
+                loop();
 
-            $scope.readEntries();
+            }, errorHandler);
 
-        }, errorHandler);
+
+
+        }
+        //callback madness
+        var update = function (){
+            newFiles = [];
+            loop();
+            $scope.files = newFiles;
+        }
+        refreshFSAnd(update);
     }
 }
+var requestedQuota = 1024 * 1024 * 1024 * 20;
+var grantedBytesGlobal = requestedQuota;
+navigator.webkitPersistentStorage.requestQuota(requestedQuota)
 
-window.webkitStorageInfo.requestQuota(PERSISTENT, 1024 * 1024 * 1024 * 20, function (grantedBytes) {
+window.requestFileSystem(PERSISTENT, requestedQuota, function (filesystem) {
+    fs = filesystem;
+    var scope = angular.element("#fileList").scope();
 
-    window.requestFileSystem(PERSISTENT, grantedBytes, function (filesystem) {
+    scope.init();
+}, errorHandler);
+
+var refreshFSAnd = function (callback) {
+    window.requestFileSystem(PERSISTENT, requestedQuota, function (filesystem) {
         fs = filesystem;
         var scope = angular.element("#fileList").scope();
-
-        scope.init();
+        scope.fs = fs;
+        scope.dirReader = fs.root.createReader();
+        callback();
     }, errorHandler)
-}, function (e) { console.log('Error', e); });
+}
 

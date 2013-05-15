@@ -30,13 +30,24 @@ function toggleRecording(e) {
         audioRecorder.stop();
         e.classList.remove("recording");
         audioRecorder.getBuffers(drawWave);
+
+        calculateTimeDifference();
+
+        alert(timeDifference);
+
     } else {
         // start recording
         if (!audioRecorder)
             return;
         e.classList.add("recording");
         audioRecorder.clear();
-        audioRecorder.beginFile("testfile.wav");
+
+        var fileNameField = document.getElementById('filename');
+        var filename = fileNameField.value;
+        audioRecorder.beginFile(filename);
+
+        setStartTime();
+
         audioRecorder.record();
     }
 }

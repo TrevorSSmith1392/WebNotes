@@ -6,11 +6,6 @@ var fileBufferR = [];
 var chunkLength = 0;
 var fileContentLength = 0;
 
-//abstract all this
-//make a way to setfiles, start writing into them, and to close them from the recorder thread.
-
-
-
 
 self.requestFileSystemSync = self.webkitRequestFileSystemSync ||
     self.requestFileSystemSync;
