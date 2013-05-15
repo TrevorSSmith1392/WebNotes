@@ -4,7 +4,7 @@
     <list default="true" id="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" name="Default" comment="" />
     <ignored path="Recorder.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1368579820306" ignored="false" />
+    <file path="/Dummy.txt" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1368596995433" ignored="false" />
     <file path="/recorderWorker.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1368504065438" ignored="false" />
     <file path="/recorder.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1368503784310" ignored="false" />
     <file path="/main.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1368595366250" ignored="false" />
@@ -34,16 +34,7 @@
       <file leaf-file-name="home.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="55" selection-start="1746" selection-end="1746" vertical-scroll-proportion="0.8516378">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="angular.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/angular.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="52" selection-start="190" selection-end="190" vertical-scroll-proportion="0.0">
+            <state line="28" column="12" selection-start="1099" selection-end="1099" vertical-scroll-proportion="0.2620424">
               <folding />
             </state>
           </provider>
@@ -334,6 +325,27 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/js/filemanager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/recorderjs/recorder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="103" column="11" selection-start="3012" selection-end="3012" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/recorderjs/recorderWorker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="26" selection-start="165" selection-end="165" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="82" selection-start="1573" selection-end="1573" vertical-scroll-proportion="0.0">
@@ -390,13 +402,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/angular.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="52" selection-start="190" selection-end="190" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/recorderjs/recorderWorker.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="26" selection-start="165" selection-end="165" vertical-scroll-proportion="0.0">
@@ -420,7 +425,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="55" selection-start="1746" selection-end="1746" vertical-scroll-proportion="0.8516378">
+        <state line="28" column="12" selection-start="1099" selection-end="1099" vertical-scroll-proportion="0.2620424">
           <folding />
         </state>
       </provider>
