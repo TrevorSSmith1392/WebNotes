@@ -62,15 +62,6 @@
             worker.postMessage({ command: 'getBuffers' })
         }
 
-        this.exportWAV = function (cb, type) {
-            currCallback = cb || config.callback;
-            type = type || config.type || 'audio/wav';
-            if (!currCallback) throw new Error('Callback not set');
-            worker.postMessage({
-                command: 'exportWAV',
-                type: type
-            });
-        }
         worker.onmessage = function (e) {
             if (typeof (e.data) == "number") {
                 console.log(e.data);

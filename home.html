@@ -3,7 +3,6 @@
 <html>
 <head>
 	<title>Audio Recorder</title>
-	<script src="js/audiodisplay.js"></script>
 	<script src="js/recorderjs/recorder.js"></script>
 	<script src="js/main.js"></script>
     <!--<script src="js/filesystem.js"></script>-->
@@ -12,45 +11,57 @@
     <script src="js/filemanager.js"></script>
     <script src="js/time.js"></script>
 
-
 	<style>
         #fileList {position: absolute; right: 100px; top: 80px;}
 	    body { font: 14pt Arial, sans-serif; background: lightgrey; }
 	    select { font: 14pt Arial, sans-serif; }
 	    body { text-align: center; margin-top: 12pt;}
 	    canvas { display: inline-block; background: #202020; box-shadow: 0px 0px 10px blue;}
-	    #record.recording { background: red; background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); }
+        #analyser {
+            position: absolute;
+            left: 15px;
+            top: 40%;
+        }
+        #controls {
+            position: absolute;
+            left: 0px;
+        }
+        #record.recording { background: red; background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); }
         button {
             display: block;
             margin: 0 auto;
         }
+        .audioFile {
+            background-color: aliceblue;
+            border: 2px solid black;
+            border-radius: 3px;
+            padding: 8px;
+        }
 	</style>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body ng-app>
-	<canvas id="analyser" width="768" height="200"></canvas><br>
-	<!-- <canvas id="wavedisplay" width="768" height="200"></canvas><br> -->
+	<canvas id="analyser" width="15" height="200"></canvas><br>
+    <div id=controls>
+        <img id="record" width="128" height="128" src="img/record.png" onclick="toggleRecording(this);"><br>
+        <div>
+            <input id=filename type="text" required placeholder="filename" value=audio />
+        </div>
+    </div>
     <div ng-controller="ListCtrl" id="fileList">
-        <h2>
-            {{files.length}}
-        </h2>
         <button ng-click="readEntries()">Refresh FS</button>
-        <button ng-click="readFileTempFunction()">Get Contents</button>
-            <h4>Contents</h4>
-            <p>{{text}}</p>
         <ul>
-            <li class="unstyled" ng-repeat="file in files">
-                {{file.name}}
-                <audio controls src="{{file.toURL()}}"/> <span class=deleteFile ng-click="deleteFile(file)">X</span>
+            <li class="audioFile unstyled" ng-repeat="file in files">
+                <div>
+                    {{file.name}}
+                    <span class=deleteFile ng-click="deleteFile(file)">X</span>
+                </div>
+                <audio controls src="{{file.toURL()}}"></audio>
             </li>
         </ul>
 
     </div>
 
-    <div>
-        <input id=filename type="text" required placeholder="filename" value=audio.wav />
-    </div>
-	<img id="record" width="128" height="128" src="img/record.png" onclick="toggleRecording(this);"><br>
-	<img src="img/save.svg" onclick="saveAudio();">
+
 </body>
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 </html>

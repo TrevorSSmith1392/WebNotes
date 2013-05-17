@@ -16,8 +16,6 @@ function errorHandler(e) {
 
 
 function ListCtrl($scope) {
-
-    $scope.text;
     $scope.files = [];
 
     $scope.deleteFile = function (fileEntry){
@@ -28,12 +26,6 @@ function ListCtrl($scope) {
     $scope.init = function () {
 
         //fs.root.getFile("fileBuffer.wav", {create: true}, null, errorHandler);
-
-        /*
-        fs.root.getFile('log.txt', {create: true}, null, errorHandler);
-        fs.root.getDirectory('mypictures', {create: true}, null, errorHandler);
-        */
-
 
         $scope.writeFile = function (file, data, append){
 
@@ -86,10 +78,6 @@ function ListCtrl($scope) {
 
     }//end init
 
-    $scope.readFileTempFunction = function (){
-        $scope.readFile("fileBuffer.wav");
-    }
-
     $scope.readEntries = function () {
         var loop =  function (){
             $scope.dirReader.readEntries(function (entries) {
@@ -126,9 +114,14 @@ navigator.webkitPersistentStorage.requestQuota(requestedQuota)
 
 window.requestFileSystem(PERSISTENT, requestedQuota, function (filesystem) {
     fs = filesystem;
-    var scope = angular.element("#fileList").scope();
 
-    scope.init();
+    var callback = function () {
+        var scope = angular.element("#fileList").scope();
+
+        scope.init();
+    }
+    setTimeout(callback, 500);
+
 }, errorHandler);
 
 var refreshFSAnd = function (callback) {

@@ -9,27 +9,11 @@ var canvasWidth, canvasHeight;
 var recIndex = 0;
 
 
-function saveAudio() {
-    audioRecorder.exportWAV(doneEncoding);
-}
-
-function drawWave(buffers) {
-    var canvas = document.getElementById("wavedisplay");
-
-    drawBuffer(canvas.width, canvas.height, canvas.getContext('2d'), buffers[0]);
-}
-
-function doneEncoding(blob) {
-    Recorder.forceDownload(blob, "myRecording" + ((recIndex < 10) ? "0" : "") + recIndex + ".wav");
-    recIndex++;
-}
-
 function toggleRecording(e) {
     if (e.classList.contains("recording")) {
         // stop recording
         audioRecorder.stop();
         e.classList.remove("recording");
-        audioRecorder.getBuffers(drawWave);
 
         calculateTimeDifference();
 
@@ -44,7 +28,7 @@ function toggleRecording(e) {
 
         var fileNameField = document.getElementById('filename');
         var filename = fileNameField.value;
-        audioRecorder.beginFile(filename);
+        audioRecorder.beginFile(filename + ".wav");
 
         setStartTime();
 
@@ -67,9 +51,7 @@ function updateAnalysers(time) {
 
     // analyzer draw code here
     {
-        var SPACING = 3;
         var BAR_WIDTH = 1;
-        var numBars = Math.round(canvasWidth / SPACING);
         var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
 
         analyserNode.getByteFrequencyData(freqByteData);
@@ -77,20 +59,24 @@ function updateAnalysers(time) {
         analyserContext.clearRect(0, 0, canvasWidth, canvasHeight);
         analyserContext.fillStyle = '#F6D565';
         analyserContext.lineCap = 'round';
-        var multiplier = analyserNode.frequencyBinCount / numBars;
 
-        // Draw rectangle for each frequency bin.
-        for (var i = 0; i < numBars; ++i) {
-            var magnitude = 0;
-            var offset = Math.floor(i * multiplier);
-            // gotta sum/average the block, or we miss narrow-bandwidth spikes
-            for (var j = 0; j < multiplier; j++)
-                magnitude += freqByteData[offset + j];
-            magnitude = magnitude / multiplier;
-            var magnitude2 = freqByteData[i * multiplier];
-            analyserContext.fillStyle = "hsl( " + Math.round((i * 360) / numBars) + ", 100%, 50%)";
-            analyserContext.fillRect(i * SPACING, canvasHeight, BAR_WIDTH, -magnitude);
+        var mag = 0;
+        for (var i = 0; i < analyserNode.frequencyBinCount / 2; i++){
+            mag += freqByteData[i];
         }
+        //mag /= analyserNode.frequencyBinCount;
+
+        mag /= 4;
+
+        var numBlocks = Math.floor(mag/ 15); //block height
+
+        for (var i = 0; i < numBlocks; i++){
+            analyserContext.fillStyle = "hsl( " +  (140 - i * 15) + ", 100%, 50%)";
+            analyserContext.fillRect(0 , canvasHeight - i * 20, 15, -15);
+        }
+
+
+
     }
 
     rafID = window.webkitRequestAnimationFrame(updateAnalysers);
@@ -107,7 +93,7 @@ function gotStream(stream) {
 
 
     analyserNode = audioContext.createAnalyser();
-    analyserNode.fftSize = 2048;
+    analyserNode.fftSize = 32;
     inputPoint.connect(analyserNode);
 
     audioRecorder = new Recorder(inputPoint);

@@ -30,9 +30,6 @@ this.onmessage = function (e) {
         case 'record':
             record(e.data.buffer);
             break;
-        case 'exportWAV':
-            exportWAV(e.data.type);
-            break;
         case 'getBuffer':
             getBuffer();
             break;
@@ -169,7 +166,7 @@ function writeString(view, offset, string) {
     }
 }
 
-//preallocate ArrayBuffer before calling, becareful about memory leaks.
+//preallocate ArrayBuffer before calling, be careful about memory leaks.
 function convertToPCM(view, input) {
     //view is view of ArrayBuffer(bytes)
     //input is Float32Array
