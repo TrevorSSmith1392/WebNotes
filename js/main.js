@@ -8,34 +8,6 @@ var analyserContext = null;
 var canvasWidth, canvasHeight;
 var recIndex = 0;
 
-
-function toggleRecording(e) {
-    if (e.classList.contains("recording")) {
-        // stop recording
-        audioRecorder.stop();
-        e.classList.remove("recording");
-
-        calculateTimeDifference();
-
-        alert(timeDifference);
-
-    } else {
-        // start recording
-        if (!audioRecorder)
-            return;
-        e.classList.add("recording");
-        audioRecorder.clear();
-
-        var fileNameField = document.getElementById('filename');
-        var filename = fileNameField.value;
-        audioRecorder.beginFile(filename + ".wav");
-
-        setStartTime();
-
-        audioRecorder.record();
-    }
-}
-
 function cancelAnalyserUpdates() {
     window.webkitCancelAnimationFrame(rafID);
     rafID = null;
@@ -66,7 +38,7 @@ function updateAnalysers(time) {
         }
         //mag /= analyserNode.frequencyBinCount;
 
-        mag /= 4;
+        mag /= 5;
 
         var numBlocks = Math.floor(mag/ 15); //block height
 

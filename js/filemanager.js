@@ -15,7 +15,7 @@ function errorHandler(e) {
 }
 
 
-function ListCtrl($scope) {
+function ListCtrl($scope, intermediary) {
     $scope.files = [];
 
     $scope.deleteFile = function (fileEntry){
