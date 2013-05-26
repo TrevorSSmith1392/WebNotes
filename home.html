@@ -70,6 +70,7 @@
 
         #currentAnnotationPlaceholder{
             position: absolute;
+            color: red;
         }
 	</style>
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
@@ -87,7 +88,7 @@
 
                                 <!--   ng-style="{bottom: bottom + 'px'}" -->
 
-            <div id="currentAnnotationPlaceholder" ng-style="{bottom: (bottom + placeholderOffset) + 'px'}">XXXXXXXXXXXXX</div>
+            <div id="currentAnnotationPlaceholder" ng-style="{bottom: (bottom + placeholderOffset) + 'px', visibility: placeholderVisibility}">--</div>
 
             <div class="shownNote" ng-repeat="note in shownAnnotations" ng-style="{bottom: (bottom + note.pixOffset) + 'px'}">
                 {{note.note}}

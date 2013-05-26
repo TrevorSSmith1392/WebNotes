@@ -4,15 +4,15 @@
     <list default="true" id="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" name="Default" comment="" />
     <ignored path="Recorder.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1369440539995" ignored="false" />
+    <file path="/Dummy.txt" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1369606774010" ignored="false" />
     <file path="/recorderWorker.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1368504065438" ignored="false" />
     <file path="/recorder.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1368503784310" ignored="false" />
     <file path="/main.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1368756357473" ignored="false" />
-    <file path="/home.html" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1369445603062" ignored="false" />
+    <file path="/home.html" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1369607604576" ignored="false" />
     <file path="/filemanager.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1368849401961" ignored="false" />
     <file path="/time.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1369442977744" ignored="false" />
     <file path="/js.angular.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1368596098395" ignored="false" />
-    <file path="/ang.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1369446654057" ignored="false" />
+    <file path="/ang.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1369607302922" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,19 +32,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="home.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="home.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="120" selection-start="3195" selection-end="3195" vertical-scroll-proportion="-49.03846">
+            <state line="72" column="23" selection-start="2337" selection-end="2337" vertical-scroll-proportion="0.672447">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ang.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ang.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/ang.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="41" selection-start="2042" selection-end="2042" vertical-scroll-proportion="0.7562724">
+            <state line="64" column="53" selection-start="2124" selection-end="2124" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -121,8 +121,8 @@
         <option value="$PROJECT_DIR$/js/filemanager.js" />
         <option value="$PROJECT_DIR$/js/main.js" />
         <option value="$PROJECT_DIR$/js/time.js" />
-        <option value="$PROJECT_DIR$/home.html" />
         <option value="$PROJECT_DIR$/js/ang.js" />
+        <option value="$PROJECT_DIR$/home.html" />
       </list>
     </option>
   </component>
@@ -158,6 +158,19 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Default" />
+        <subPane subId="Problems" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Changed Files" />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -210,19 +223,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Default" />
-        <subPane subId="Problems" />
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Changed Files" />
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -263,7 +263,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -412,13 +412,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/recorderjs/recorderWorker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="168" column="45" selection-start="4620" selection-end="4620" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/filemanager.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="38" selection-start="709" selection-end="709" vertical-scroll-proportion="0.0">
@@ -440,16 +433,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/home.html">
+    <entry file="file://$PROJECT_DIR$/js/recorderjs/recorderWorker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="120" selection-start="3195" selection-end="3195" vertical-scroll-proportion="-49.03846">
+        <state line="168" column="45" selection-start="4620" selection-end="4620" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/ang.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="41" selection-start="2042" selection-end="2042" vertical-scroll-proportion="0.7562724">
+        <state line="64" column="53" selection-start="2124" selection-end="2124" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="23" selection-start="2337" selection-end="2337" vertical-scroll-proportion="0.672447">
           <folding />
         </state>
       </provider>

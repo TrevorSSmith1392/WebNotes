@@ -49,21 +49,24 @@ realityIndex.directive('ngKeyup', function() {
             if (event.which == 27){
                 scope.annotationStarted = false;
                 scope.annotationField = '';
+                scope.placeholderVisibility = "hidden";
             }
             //check started state for grabbing time
             else if (!scope.annotationStarted){
                 scope.annotationStarted = true;
                 scope.currentAnnotationStartTime = new Date().getTime();
+                scope.placeholderVisibility = "visible";
             }
 
             //else check if enter was pressed
             else if (event.which === 13) {
                 scope.annotationStarted = false;
                 scope.$apply(scope.addAnnotation)
+                scope.placeholderVisibility = "hidden";
             }
 
-            scope.$apply();
-            alert(scope.placeholderOffset);
+          //  scope.$apply();
+//            alert(scope.placeholderOffset);
         });
     };
 });
@@ -83,8 +86,6 @@ function UICtrl($scope, intermediary, $timeout){
 
             calculateTimeDifference();
 
-            //testing
-            alert(timeDifference);
 
         } else {
             // start recording
@@ -109,6 +110,7 @@ function UICtrl($scope, intermediary, $timeout){
     $scope.annotationStarted = false;
     $scope.currentAnnotationStartTime = 0;
     $scope.placeholderOffset = 0;
+    $scope.placeholderVisibility = "gone";
 
     $scope.addAnnotation = function () {
 
@@ -151,7 +153,7 @@ function UICtrl($scope, intermediary, $timeout){
             }
 
             var placeholderTimeOffset = timeFromNow(now, $scope.currentAnnotationStartTime);
-            $scope.placeholderOffset = timeOffset * scrollSpeed;
+            $scope.placeholderOffset = placeholderTimeOffset * scrollSpeed;
 
             $scope.tickShown();
         }, 100);
