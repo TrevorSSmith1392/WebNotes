@@ -51,7 +51,7 @@ function beginFile(filename){
     createWavStart();
 }
 
-//may want to parameterize this
+//may want to parametrize this
 function createWavStart(){
     var buffer = new ArrayBuffer(44);
     var view = new DataView(buffer);

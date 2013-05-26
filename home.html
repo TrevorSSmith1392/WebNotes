@@ -85,19 +85,12 @@
             </div>
         </div>
         <div id=timeline>
-
-                                <!--   ng-style="{bottom: bottom + 'px'}" -->
-
             <div id="currentAnnotationPlaceholder" ng-style="{bottom: (bottom + placeholderOffset) + 'px', visibility: placeholderVisibility}">--</div>
-
             <div class="shownNote" ng-repeat="note in shownAnnotations" ng-style="{bottom: (bottom + note.pixOffset) + 'px'}">
                 {{note.note}}
-
             </div>
 
-            {{fileAnnotations}}
-            {{offsets}}                          <!-- isRecording -->
-           <div id=notezone contenteditable="true" ng-show="true" ng-init="bottom = 120" ng-style="{bottom: bottom + 'px'}"
+           <div id=notezone contenteditable="true" ng-show="isRecording" ng-init="bottom = 120" ng-style="{bottom: bottom + 'px'}"
                 ng-keyup ng-model="annotationField">
            </div>
 

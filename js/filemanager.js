@@ -18,6 +18,20 @@ function errorHandler(e) {
 function ListCtrl($scope, intermediary) {
     $scope.files = [];
 
+    $scope.$on('shareJson', function() {
+        var annotations = intermediary.jsonAnnotations.annotationList;
+        var filename = intermediary.jsonAnnotations.recordingName;
+
+        fs.root.getFile(filename, {create: true}, function (fileEntry){
+            fileEntry.remove(function (){
+                $scope.writeFile(filename, JSON.stringify(annotations));
+            });
+        })
+
+
+
+    });
+
     $scope.deleteFile = function (fileEntry){
         fileEntry.remove($scope.readEntries);
     }

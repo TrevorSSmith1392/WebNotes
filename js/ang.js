@@ -1,12 +1,10 @@
 var realityIndex = angular.module("RealityIndex", ['editable']);
 
-//get way of communicating figured out
-//get way of creating different files figured out
-//somehow associate files in display list with both json and everything
-//get the keyup directive working for on shift + enter
-//figure out relativistic way of making things float upward. $timeout, current time might help
 
-//store json on end recording
+//need to
+//somehow associate files in display list with both json and everything
+
+//need extract and interface (multiple views)
 
 //export
 
@@ -36,6 +34,17 @@ angular.module('editable', []).directive('contenteditable', function() {
 realityIndex.factory("intermediary", function ($rootScope) {
     var intermediary = {};
 
+    intermediary.jsonAnnotations = undefined;
+
+    intermediary.shareAnnotations = function (annotations) {
+        this.jsonAnnotations = annotations;
+        this.broadcastJson();
+    }
+
+    intermediary.broadcastJson = function () {
+        $rootScope.$broadcast('shareJson');
+    }
+
     return intermediary;
 })
 
@@ -43,7 +52,7 @@ realityIndex.directive('ngKeyup', function() {
     return function(scope, elm, attrs) {
         elm.bind("keyup", function(event) {
 
-            //need to show and hide placeholder from here
+            //should abstract view toggle a bit
 
             //capture escape for toggling off started state
             if (event.which == 27){
@@ -61,12 +70,9 @@ realityIndex.directive('ngKeyup', function() {
             //else check if enter was pressed
             else if (event.which === 13) {
                 scope.annotationStarted = false;
-                scope.$apply(scope.addAnnotation)
                 scope.placeholderVisibility = "hidden";
+                scope.$apply(scope.addAnnotation)
             }
-
-          //  scope.$apply();
-//            alert(scope.placeholderOffset);
         });
     };
 });
@@ -86,7 +92,7 @@ function UICtrl($scope, intermediary, $timeout){
 
             calculateTimeDifference();
 
-
+            $scope.writeFileAnnotations();
         } else {
             // start recording
             if (!audioRecorder)
@@ -99,18 +105,27 @@ function UICtrl($scope, intermediary, $timeout){
             setStartTime();
 
             audioRecorder.record();
-            $scope.startFileAnnotations();
+
+            setTimeout(function() {document.getElementById("notezone").focus()}, 250);
         }
     }
-    $scope.startFileAnnotations = function(){
-        $scope.recordingName = $scope.filename + ".json";
+    $scope.writeFileAnnotations = function(){
+        //for now, create json file at end of recording. May want to start it at beginning and write during recording
+
+        var annotations = {};
+        annotations.recordingName = $scope.filename + ".json";
+        annotations.annotationList = $scope.fileAnnotations;
+
+        $scope.fileAnnotations = [];
+
+        intermediary.shareAnnotations(annotations);
     }
 
     //too many global variables!
     $scope.annotationStarted = false;
     $scope.currentAnnotationStartTime = 0;
     $scope.placeholderOffset = 0;
-    $scope.placeholderVisibility = "gone";
+    $scope.placeholderVisibility = "hidden";
 
     $scope.addAnnotation = function () {
 
@@ -143,17 +158,23 @@ function UICtrl($scope, intermediary, $timeout){
 
                 //recalculate the offset based on the time
 
-
-
                 var timeOffset = timeFromNow(now, shown.postTime);
 
                 //convert to pix offset;
                 shown.pixOffset = timeOffset * scrollSpeed;
 
+                //make this responsive
+                if(shown.pixOffset > 1500){
+                    $scope.shownAnnotations[i] = undefined;
+                }
             }
 
-            var placeholderTimeOffset = timeFromNow(now, $scope.currentAnnotationStartTime);
-            $scope.placeholderOffset = placeholderTimeOffset * scrollSpeed;
+            $scope.shownAnnotations = $scope.shownAnnotations.filter(function(e){return e !== undefined});
+
+            if ($scope.annotationStarted){
+                var placeholderTimeOffset = timeFromNow(now, $scope.currentAnnotationStartTime);
+                $scope.placeholderOffset = placeholderTimeOffset * scrollSpeed;
+            }
 
             $scope.tickShown();
         }, 100);
