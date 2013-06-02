@@ -1,12 +1,19 @@
 var realityIndex = angular.module("RealityIndex", ['editable']);
 
+//make way of modifying relative input time
 
 //need to
 //somehow associate files in display list with both json and everything
 
 //need extract and interface (multiple views)
 
+//interface meaning retrieval
+//should be some way of having a time based, and list based view
+
+
 //export
+
+//multiple users on same stream (figure out logistics for sharing)
 
 angular.module('editable', []).directive('contenteditable', function() {
     return {
@@ -77,7 +84,28 @@ realityIndex.directive('ngKeyup', function() {
     };
 });
 
-function UICtrl($scope, intermediary, $timeout){
+function UICtrl($scope, intermediary, $timeout, $window){
+
+    $scope.bottom = 120;
+    $scope.height = $window.innerHeight - $scope.bottom;
+    var scrollSpeed = 30;
+    $scope.timeTicks = [];
+    $window.onresize = function (e) {
+        $scope.height = $window.innerHeight - $scope.bottom;
+
+        $scope.timeTicks = [];
+        var backTime = 0;
+        for (var i = 0; i <= $scope.height; i+= scrollSpeed){
+            var backpx = i;
+
+            //not smart
+            if (backTime % 5 === 0){
+                $scope.timeTicks.push({px: backpx, timePast: backTime})
+            }
+            backTime++;
+        }
+    }
+
 
     $scope.recordingName;
     $scope.fileAnnotations = [];
@@ -151,8 +179,9 @@ function UICtrl($scope, intermediary, $timeout){
         $timeout(function () {
 
             var now = new Date().getTime();
-            var scrollSpeed = 30;
 
+
+            var deleted = 0;
             for (var i = 0; i < $scope.shownAnnotations.length; i++){
                 var shown = $scope.shownAnnotations[i];
 
@@ -165,11 +194,14 @@ function UICtrl($scope, intermediary, $timeout){
 
                 //make this responsive
                 if(shown.pixOffset > 1500){
+                    deleted++;
                     $scope.shownAnnotations[i] = undefined;
                 }
             }
 
-            $scope.shownAnnotations = $scope.shownAnnotations.filter(function(e){return e !== undefined});
+            if (deleted > 0){
+                $scope.shownAnnotations = $scope.shownAnnotations.filter(function(e){return e !== undefined});
+            }
 
             if ($scope.annotationStarted){
                 var placeholderTimeOffset = timeFromNow(now, $scope.currentAnnotationStartTime);

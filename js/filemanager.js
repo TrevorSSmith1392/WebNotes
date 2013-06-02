@@ -16,7 +16,7 @@ function errorHandler(e) {
 
 
 function ListCtrl($scope, intermediary) {
-    $scope.files = [];
+    $scope.recordings = {};
 
     $scope.$on('shareJson', function() {
         var annotations = intermediary.jsonAnnotations.annotationList;
@@ -103,7 +103,27 @@ function ListCtrl($scope, intermediary) {
                 //call back requires this function to use apply
                 for (var i = 0 ; i < entries.length; i++){
 
-                    newFiles.push(entries[i]);
+                    //all this may be unnecessary. Might not need json to be associated here
+                    var entry = entries[i];
+                    var extSplit = entry.name.lastIndexOf(".");
+                    var fileRoot = entry.name.substring(0,extSplit);
+                    var ext = entry.name.substring(extSplit + 1);
+
+                    var recording = newRecordings[fileRoot];
+
+                    if (!recording){
+                        newRecordings[fileRoot] = {};
+                    }
+                    if (ext === "wav"){
+                        newRecordings[fileRoot].wav = entry;
+                    }
+                    else if (ext === "json"){
+                        newRecordings[fileRoot].json = entry;
+                    }
+                    else {
+                        //should use more proper error here
+                        alert("What did you do?");
+                    }
                 }
 
                 loop();
@@ -115,9 +135,10 @@ function ListCtrl($scope, intermediary) {
         }
         //callback madness
         var update = function (){
-            newFiles = [];
+            newRecordings = {};
             loop();
-            $scope.files = newFiles;
+            $scope.recordings = newRecordings;
+            glob = $scope.recordings;
         }
         refreshFSAnd(update);
     }
