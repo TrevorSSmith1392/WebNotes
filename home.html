@@ -11,6 +11,8 @@
     <script src="js/filemanager.js"></script>
     <script src="js/time.js"></script>
     <script src="js/ang.js"></script>
+    <script src="js/playbackCtrl.js"></script>
+    <script src="js/recordCtrl.js"></script>
 
 	<style>
         #fileList {position: absolute; right: 100px; top: 80px;}
@@ -84,39 +86,15 @@
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body ng-app="RealityIndex">
-    <div id="recordui" ng-controller="UICtrl">
-        <canvas id="analyser" width="15" height="200"></canvas><br>
-        <div id=controls>
-            <img id="record" width="128" height="128" src="img/record.png" ng-class="{recording: isRecording}" ng-click="toggleRecording(this)"><br>
-            <div>
-                <input id=filename type="text" ng-init="filename = 'audioNotes'" ng-model="filename" required placeholder="filename"/>
-            </div>
-        </div>
-        <div id=timeline>
-            <div id=tickmarks ng-style="{height: height + 'px'}">
-                <div class="timeTick" ng-repeat="t in timeTicks" ng-style="{bottom: t.px + 'px'}">-{{t.timePast}}</div>
-            </div>
-
-            <div id="currentAnnotationPlaceholder" ng-style="{bottom: (bottom + placeholderOffset) + 'px', visibility: placeholderVisibility}">--</div>
-            <div class="shownNote" ng-repeat="note in shownAnnotations" ng-style="{bottom: (bottom + note.pixOffset) + 'px'}">
-                {{note.note}}
-            </div>
-
-           <div id=notezone contenteditable="true" ng-show="isRecording" ng-style="{bottom: bottom + 'px'}"
-                ng-keyup ng-model="annotationField">
-           </div>
-
-        </div>
-    </div>
+    <div ng-view></div>
     <div ng-controller="ListCtrl" id="fileList">
         <button ng-click="readEntries()">Refresh FS</button>
         <ul class="unstyled">
             possibly want to refresh fs after finishing recording
                   <br>
-            need to now have a way of calling up the recording view for each recording from here
             <li class="audioFile" ng-repeat="recording in recordings">
                 <div>
-                    {{recording.wav.name}}
+                    <a href="#{{recording.root}}">{{recording.wav.name}}</a>
                     <span class=deleteFile ng-click="deleteFile(recording.wav); deleteFile(recording.json)">X</span>
                 </div>
                 <audio controls src="{{recording.wav.toURL()}}"></audio>

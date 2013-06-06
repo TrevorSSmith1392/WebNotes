@@ -16,8 +16,6 @@ function errorHandler(e) {
 
 
 function ListCtrl($scope, intermediary) {
-    $scope.recordings = {};
-
     $scope.$on('shareJson', function() {
         var annotations = intermediary.jsonAnnotations.annotationList;
         var filename = intermediary.jsonAnnotations.recordingName;
@@ -26,11 +24,16 @@ function ListCtrl($scope, intermediary) {
             fileEntry.remove(function (){
                 $scope.writeFile(filename, JSON.stringify(annotations));
             });
-        })
-
-
-
+        });
     });
+    $scope.$on('requestAnnotations', function (){
+        var recordingName = intermediary.recordingName;
+        $scope.readFile(recordingName + ".json", function (annotationJSON){
+            intermediary.respondWithAnnotations(JSON.parse(annotationJSON));
+        });
+    });
+
+    $scope.recordings = {};
 
     $scope.deleteFile = function (fileEntry){
         fileEntry.remove($scope.readEntries);
@@ -67,7 +70,7 @@ function ListCtrl($scope, intermediary) {
             $scope.writeFile(file,data,true);
         }
 
-        $scope.readFile = function (fileName) {
+        $scope.readFile = function (fileName, cb) {
             fs.root.getFile(fileName, {}, function(fileEntry) {
 
                 // Get a File object representing the file,
@@ -76,7 +79,9 @@ function ListCtrl($scope, intermediary) {
                     var reader = new FileReader();
 
                     reader.onloadend = function(e) {
-                        $scope.text = this.result;
+                        //this is what happens with the result
+                        cb(this.result);
+                        //$scope.text = this.result;
                     };
 
                     reader.readAsText(file);
@@ -103,7 +108,6 @@ function ListCtrl($scope, intermediary) {
                 //call back requires this function to use apply
                 for (var i = 0 ; i < entries.length; i++){
 
-                    //all this may be unnecessary. Might not need json to be associated here
                     var entry = entries[i];
                     var extSplit = entry.name.lastIndexOf(".");
                     var fileRoot = entry.name.substring(0,extSplit);
@@ -115,6 +119,9 @@ function ListCtrl($scope, intermediary) {
                         newRecordings[fileRoot] = {};
                     }
                     if (ext === "wav"){
+                        //total hack
+                        newRecordings[fileRoot].root = fileRoot;
+
                         newRecordings[fileRoot].wav = entry;
                     }
                     else if (ext === "json"){

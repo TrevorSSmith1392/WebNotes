@@ -8,6 +8,8 @@ var analyserContext = null;
 var canvasWidth, canvasHeight;
 var recIndex = 0;
 
+//all this needs to be launched from the recordCtrl
+
 function cancelAnalyserUpdates() {
     window.webkitCancelAnimationFrame(rafID);
     rafID = null;
@@ -75,6 +77,7 @@ function gotStream(stream) {
     inputPoint.connect(zeroGain);
     zeroGain.connect(audioContext.destination);
     updateAnalysers();
+    mediaAuthorized = true;
 }
 
 function initAudio() {

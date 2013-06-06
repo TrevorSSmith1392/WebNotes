@@ -1,0 +1,25 @@
+<div id="recordui" ng-controller="RecordCtrl">
+    need to launch everything from main.js from recordCtrl
+    <canvas id="analyser" width="15" height="200"></canvas><br>
+    <div id=controls>
+        <img id="record" width="128" height="128" src="img/record.png" ng-class="{recording: isRecording}" ng-click="toggleRecording(this)"><br>
+        <div>
+            <input id=filename type="text" ng-init="filename = 'audioNotes'" ng-model="filename" required placeholder="filename"/>
+        </div>
+    </div>
+    <div id=timeline>
+        <div id=tickmarks ng-style="{height: height + 'px'}">
+            <div class="timeTick" ng-repeat="t in timeTicks" ng-style="{bottom: t.px + 'px'}">-{{t.timePast}}</div>
+        </div>
+
+        <div id="currentAnnotationPlaceholder" ng-style="{bottom: (bottom + placeholderOffset) + 'px', visibility: placeholderVisibility}">--</div>
+        <div class="shownNote" ng-repeat="note in shownAnnotations" ng-style="{bottom: (bottom + note.pixOffset) + 'px'}">
+            {{note.note}}
+        </div>
+
+        <div id=notezone contenteditable="true" ng-show="isRecording" ng-style="{bottom: bottom + 'px'}"
+             ng-keyup ng-model="annotationField">
+        </div>
+
+    </div>
+</div>
