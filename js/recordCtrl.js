@@ -125,13 +125,4 @@ function RecordCtrl($scope, intermediary, $timeout, $window){
         }, 100);
     }
     $scope.tickShown();
-    /*
-     $scope.onfilecreated("something", function (filename) {
-     $scope.fileAnnotations[filename + ".json"] = {};
-     }
-
-     $scope.onrequestinfo(){
-     return $scope.fileAnnotations{filerequested}
-     }
-     */
 }

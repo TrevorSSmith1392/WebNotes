@@ -95,6 +95,8 @@ function ListCtrl($scope, intermediary) {
         $scope.readEntries();
 
 
+        intermediary.filesystemInitialized();
+
     }//end init
 
     $scope.readEntries = function () {

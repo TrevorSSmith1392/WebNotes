@@ -46,6 +46,12 @@ angular.module('editable', []).directive('contenteditable', function() {
 realityIndex.factory("intermediary", function ($rootScope) {
     var intermediary = {};
 
+    intermediary.initialized = false;
+    intermediary.filesystemInitialized = function () {
+        intermediary.initialized = true;
+        $rootScope.$broadcast('filesystemInitialized');
+    }
+
     //recording functions
     intermediary.jsonAnnotations = undefined;
     intermediary.shareAnnotations = function (annotations) {

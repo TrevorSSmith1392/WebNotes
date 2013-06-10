@@ -76,7 +76,13 @@ function gotStream(stream) {
     zeroGain.gain.value = 0.0;
     inputPoint.connect(zeroGain);
     zeroGain.connect(audioContext.destination);
-    updateAnalysers();
+
+    //hack
+    var canvas = document.getElementById("analyser");
+    if (canvas) {
+        updateAnalysers();
+    }
+
     mediaAuthorized = true;
 }
 
