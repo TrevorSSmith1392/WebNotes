@@ -34,6 +34,8 @@ function RecordCtrl($scope, intermediary, $timeout, $window){
             calculateTimeDifference();
 
             $scope.writeFileAnnotations();
+
+            intermediary.refreshFiles();
         } else {
             // start recording
             if (!audioRecorder)

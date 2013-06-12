@@ -1,0 +1,33 @@
+#fileList {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#entryList {
+    position: absolute;
+    right: 20px;
+    top: 85px;
+}
+.audioFile {
+    background-color: aliceblue;
+    border: 2px solid black;
+    border-radius: 3px;
+    padding: 8px;
+}
+#showList{
+    position: absolute;
+    right: 0;
+    top: 35px;
+    width: 32px;
+    height: 32px;
+}
+#controls {
+    position: absolute;
+    left: 0px;
+}
+.folder {
+    background-position: 0 0;
+}
+.folderOpen {
+    background-position: -64px 0 !important;
+}

@@ -32,7 +32,30 @@ function ListCtrl($scope, intermediary) {
             intermediary.respondWithAnnotations(JSON.parse(annotationJSON));
         });
     });
+    $scope.$on('refreshFS', function() {
+        $scope.readEntries();
+    })
 
+    {
+        if (localStorage.openFolder === undefined || localStorage.openFolder === "f"){
+            localStorage.openFolder = "f";
+            $scope.openFolder = false;
+        }
+        else {
+            $scope.openFolder = true;
+        }
+
+        $scope.toggleFolder = function () {
+            if (localStorage.openFolder === "f"){
+                localStorage.openFolder = "t";
+                $scope.openFolder = true;
+            }
+            else{
+                localStorage.openFolder = "f";
+                $scope.openFolder = false;
+            }
+        };
+    }
     $scope.recordings = {};
 
     $scope.deleteFile = function (fileEntry){

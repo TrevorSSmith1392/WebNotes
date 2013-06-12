@@ -71,6 +71,10 @@ realityIndex.factory("intermediary", function ($rootScope) {
         $rootScope.$broadcast('annotationResponse')
     }
 
+    intermediary.refreshFiles = function() {
+        $rootScope.$broadcast('refreshFS');
+    }
+
     return intermediary;
 })
 
