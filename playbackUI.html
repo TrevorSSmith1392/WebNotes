@@ -1,7 +1,15 @@
+<!-- why is back button broken -->
+<div id=playBackHeader><a href="#/">Record</a></div>
 <div id=playbackZone>
+
     <div id=playbackTimeline></div>
     <span id="playbackLocation" ng-style="{location: 'something'}">|</span>
     <!-- possibly add some controls -->
     <!-- also need to get audio stream, possibly should be done through javascript -->
+    <!-- need to get info about audio file into javascript -->
     <span class="playbackAnnotation" ng-repeat="annotation in recordingAnnotations">{{annotation}}</span>
+
+    <br><!--temp-->
+
+    <audio id="playbackAudio" controls ng-src="{{fileURL}}"></audio>
 </div>

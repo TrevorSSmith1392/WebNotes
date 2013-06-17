@@ -8,21 +8,32 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout){
     //wait for file system to be initialized before requesting annotations
     //*hacky
     if (intermediary.initialized){
-        intermediary.requestAnnotations($scope.recordingName);
+        intermediary.requestRecordingInfo($scope.recordingName);
     }
     else{
         $scope.$on('filesystemInitialized', function () {
-            intermediary.requestAnnotations($scope.recordingName);
+            intermediary.requestRecordingInfo($scope.recordingName);
         })
     }
     //*/
-
-    $scope.$on('annotationResponse', function () {
+    $scope.$on('recordingInfoResponse', function () {
 
         //for some reason apply needs to be called. I don't know why the $on function isn't in angular
         //accordingly, this all could be simplified using timeout recursively
-         $scope.$apply($scope.recordingAnnotations = intermediary.annotationResponse);
+        $scope.fileURL = intermediary.fileURL;
+        $scope.recordingAnnotations = intermediary.annotationResponse;
+        $scope.$apply($scope.layoutPlayback);
     });
+
+    $scope.layoutPlayback = function () {
+        //get audio
+
+        //audio.duration
+        //audio.currentTime
+        //audio.play()
+        //audio.pause()
+
+    };
 
     //then need to make the UI somehow
 }

@@ -42,42 +42,6 @@ angular.module('editable', []).directive('contenteditable', function() {
     };
 });
 
-
-realityIndex.factory("intermediary", function ($rootScope) {
-    var intermediary = {};
-
-    intermediary.initialized = false;
-    intermediary.filesystemInitialized = function () {
-        intermediary.initialized = true;
-        $rootScope.$broadcast('filesystemInitialized');
-    }
-
-    //recording functions
-    intermediary.jsonAnnotations = undefined;
-    intermediary.shareAnnotations = function (annotations) {
-        this.jsonAnnotations = annotations;
-        $rootScope.$broadcast('shareJson');
-    }
-
-    //playbackFunctions
-    intermediary.recordingName = undefined;
-    intermediary.requestAnnotations = function (recordingName){
-        this.recordingName = recordingName;
-        $rootScope.$broadcast('requestAnnotations');
-    }
-    intermediary.annotationResponse = undefined;
-    intermediary.respondWithAnnotations = function(annotations){
-        this.annotationResponse = annotations;
-        $rootScope.$broadcast('annotationResponse')
-    }
-
-    intermediary.refreshFiles = function() {
-        $rootScope.$broadcast('refreshFS');
-    }
-
-    return intermediary;
-})
-
 realityIndex.directive('ngKeyup', function() {
     return function(scope, elm, attrs) {
         elm.bind("keyup", function(event) {
@@ -106,3 +70,43 @@ realityIndex.directive('ngKeyup', function() {
         });
     };
 });
+
+
+realityIndex.factory("intermediary", function ($rootScope) {
+    var intermediary = {};
+
+    intermediary.initialized = false;
+    intermediary.filesystemInitialized = function () {
+        intermediary.initialized = true;
+        $rootScope.$broadcast('filesystemInitialized');
+    }
+
+    //recording functions
+    intermediary.jsonAnnotations = undefined;
+    intermediary.shareAnnotations = function (annotations) {
+        this.jsonAnnotations = annotations;
+        $rootScope.$broadcast('shareJson');
+    }
+
+    //playbackFunctions
+    intermediary.recordingName = undefined;
+
+    intermediary.requestRecordingInfo = function (recordingName){
+        this.recordingName = recordingName;
+        $rootScope.$broadcast('requestRecordingInfo');
+    }
+    intermediary.annotationResponse = undefined;
+    intermediary.fileURL = "";
+    intermediary.respondWithRecordingInfo = function(annotations, url){
+        this.annotationResponse = annotations;
+        this.fileURL = url;
+        $rootScope.$broadcast('recordingInfoResponse')
+    }
+
+    intermediary.refreshFiles = function() {
+        $rootScope.$broadcast('refreshFS');
+    }
+
+
+    return intermediary;
+})

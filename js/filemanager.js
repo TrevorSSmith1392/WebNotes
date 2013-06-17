@@ -26,16 +26,16 @@ function ListCtrl($scope, intermediary) {
             });
         });
     });
-    $scope.$on('requestAnnotations', function (){
+    $scope.$on('requestRecordingInfo', function (){
         var recordingName = intermediary.recordingName;
         $scope.readFile(recordingName + ".json", function (annotationJSON){
-            intermediary.respondWithAnnotations(JSON.parse(annotationJSON));
+            intermediary.respondWithRecordingInfo(JSON.parse(annotationJSON),
+                                                  $scope.recordings[recordingName].wav.toURL());
         });
     });
     $scope.$on('refreshFS', function() {
         $scope.readEntries();
     })
-
     {
         if (localStorage.openFolder === undefined || localStorage.openFolder === "f"){
             localStorage.openFolder = "f";
@@ -115,18 +115,19 @@ function ListCtrl($scope, intermediary) {
         }
 
         $scope.dirReader = fs.root.createReader();
-        $scope.readEntries();
-
-
-        intermediary.filesystemInitialized();
+        $scope.readEntries(true);
 
     }//end init
 
-    $scope.readEntries = function () {
+    $scope.readEntries = function (initial) {
         var loop =  function (){
             $scope.dirReader.readEntries(function (entries) {
                 if (!entries.length){
                     //I don't like this here
+                    $scope.recordings = newRecordings;
+                    if(initial){
+                        intermediary.filesystemInitialized();
+                    }
                     $scope.$apply();
                     return;
                 }
@@ -169,8 +170,9 @@ function ListCtrl($scope, intermediary) {
         var update = function (){
             newRecordings = {};
             loop();
-            $scope.recordings = newRecordings;
-            glob = $scope.recordings;
+            //this shouldn't work
+
+
         }
         refreshFSAnd(update);
     }
