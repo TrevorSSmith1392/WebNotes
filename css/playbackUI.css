@@ -1,0 +1,19 @@
+
+/*might want to define all margins with px using screen width*/
+#playbackTimeline {
+    position: absolute;
+    width: 80%;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    height: 100px;
+    margin-left: 10%;
+}
+#playbackLocation {
+    position: absolute;
+    margin-left: 10%;
+    left: 10px;
+}
+
+.playbackAnnotation {
+
+}

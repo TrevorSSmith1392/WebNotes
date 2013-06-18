@@ -26,7 +26,9 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout){
     });
 
     $scope.layoutPlayback = function () {
-        //get audio
+        $scope.audio = document.getElementById('playbackAudio');
+        $scope.duration = $scope.audio.duration;
+
 
         //audio.duration
         //audio.currentTime

@@ -1,15 +1,10 @@
 <!-- why is back button broken -->
-<div id=playBackHeader><a href="#/">Record</a></div>
+<div id=playbackHeader><a href="#/">Record</a></div>
+<audio id="playbackAudio" ng-src="{{fileURL}}"></audio>
 <div id=playbackZone>
-
+         need to properly imagine how to make the timeline ticks look (should they even be ticks?)
     <div id=playbackTimeline></div>
-    <span id="playbackLocation" ng-style="{location: 'something'}">|</span>
-    <!-- possibly add some controls -->
-    <!-- also need to get audio stream, possibly should be done through javascript -->
-    <!-- need to get info about audio file into javascript -->
-    <span class="playbackAnnotation" ng-repeat="annotation in recordingAnnotations">{{annotation}}</span>
+    <div id="playbackLocation" ng-style="{location: 'something'}">|</div>
 
-    <br><!--temp-->
-
-    <audio id="playbackAudio" controls ng-src="{{fileURL}}"></audio>
+    <div class="playbackAnnotation" ng-repeat="annotation in recordingAnnotations"></div>
 </div>
