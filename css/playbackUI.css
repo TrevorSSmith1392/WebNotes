@@ -7,6 +7,7 @@
     border-left: 1px solid black;
     height: 100px;
     margin-left: 10%;
+    top: 40%;
 }
 #playbackLocation {
     position: absolute;
@@ -15,5 +16,6 @@
 }
 
 .playbackAnnotation {
-
+    position: absolute;
+    margin-left: 10%;
 }

@@ -1,9 +1,26 @@
-function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout){
+realityIndex.directive('loadmetadata', function(){
+    //all this should be called after ng-src updates the src, which
+    //happens after the filemanager returns the recording info in $on('recordingInfoResponse')
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs, ctrl){
+            element.bind('loadedmetadata', function(){
+                //only do this if ng-src has triggered
+                if(attrs.src){
+                    scope.audio = document.getElementById('playbackAudio');
+                    scope.duration = scope.audio.duration;
+                    scope.$apply(scope.layoutAnnotations());
+                }
+            })
+        }
+    }
+})
+
+function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
     $scope.recordingName = $routeParams.recordingName;
 
     $scope.recordingAnnotations = '';
-    //need to get the js file by that name
-
+    $scope.clientWidth =  document.getElementById('playbackTimeline').clientWidth;
 
     //wait for file system to be initialized before requesting annotations
     //*hacky
@@ -17,25 +34,38 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout){
     }
     //*/
     $scope.$on('recordingInfoResponse', function () {
-
-        //for some reason apply needs to be called. I don't know why the $on function isn't in angular
-        //accordingly, this all could be simplified using timeout recursively
-        $scope.fileURL = intermediary.fileURL;
-        $scope.recordingAnnotations = intermediary.annotationResponse;
+        //this all could be simplified using timeout recursively
         $scope.$apply($scope.layoutPlayback);
     });
 
     $scope.layoutPlayback = function () {
-        $scope.audio = document.getElementById('playbackAudio');
-        $scope.duration = $scope.audio.duration;
-
-
-        //audio.duration
+        //this triggers the event that calls the final layout code, layoutAnnotations();
+        $scope.fileURL = intermediary.fileURL;
+        $scope.recordingAnnotations = intermediary.annotationResponse;
         //audio.currentTime
-        //audio.play()
-        //audio.pause()
-
     };
 
-    //then need to make the UI somehow
+    $scope.baseTop = $window.innerHeight * .47;
+    $scope.layoutAnnotations = function () {
+        var levels = [-75,50,-25,75,-50,25];
+        var currentLevel = 0;
+
+        var AddLayoutData = function(levelIndex){
+            var timeProportion = this.offset / $scope.audio.duration;
+            this.position = timeProportion * $scope.clientWidth;
+            this.level = levels[levelIndex];
+        }
+        for (var i = 0; i < $scope.recordingAnnotations.length; i++){
+            //why
+            AddLayoutData.apply($scope.recordingAnnotations[i], [currentLevel]);
+
+            if (++currentLevel == levels.length){
+                currentLevel = 0;
+            }
+        }
+    }
+
+    $window.onresize = function (e) {
+        $scope.$apply($scope.baseTop = $window.innerHeight * .47);
+    }
 }

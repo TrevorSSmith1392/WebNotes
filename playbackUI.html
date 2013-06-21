@@ -1,10 +1,9 @@
 <!-- why is back button broken -->
 <div id=playbackHeader><a href="#/">Record</a></div>
-<audio id="playbackAudio" ng-src="{{fileURL}}"></audio>
+<audio loadmetadata id="playbackAudio" ng-src="{{fileURL}}"></audio>
 <div id=playbackZone>
-         need to properly imagine how to make the timeline ticks look (should they even be ticks?)
     <div id=playbackTimeline></div>
     <div id="playbackLocation" ng-style="{location: 'something'}">|</div>
+    <div class="playbackAnnotation {{annotation.level}}" ng-repeat="annotation in recordingAnnotations" ng-style="{left: annotation.position + 'px', top: (baseTop + annotation.level) + 'px'}">{{annotation.note}}</div>
 
-    <div class="playbackAnnotation" ng-repeat="annotation in recordingAnnotations"></div>
 </div>

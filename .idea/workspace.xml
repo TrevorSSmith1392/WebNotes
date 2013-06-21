@@ -4,7 +4,7 @@
     <list default="true" id="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" name="Default" comment="" />
     <ignored path="Recorder.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1371526130055" ignored="false" />
+    <file path="/Dummy.txt" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1371770700246" ignored="false" />
     <file path="/recorderWorker.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1368504065438" ignored="false" />
     <file path="/recorder.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1368503784310" ignored="false" />
     <file path="/main.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1370665871147" ignored="false" />
@@ -30,12 +30,12 @@
     <file path="$APPLICATION_HOME_DIR$/plugins/xpath/lib/xpath.jar!/org/intellij/lang/xpath/xslt/resources/xslt-schema.xsd" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1370482584680" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/lib/webstorm.jar!/standardSchemas/xhtml1-frameset.xsd" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1370482584680" ignored="false" />
     <file path="/playback.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1370488506541" ignored="false" />
-    <file path="/playbackUI.html" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1371529605342" ignored="false" />
+    <file path="/playbackUI.html" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1371782159725" ignored="false" />
     <file path="/recordCtrl.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1370926090085" ignored="false" />
     <file path="/recordUI.html" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1371434651288" ignored="false" />
-    <file path="/playbackCtrl.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1371526484841" ignored="false" />
+    <file path="/playbackCtrl.js" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1371781502591" ignored="false" />
     <file path="/fileList.css" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1370921148875" ignored="false" />
-    <file path="/playbackUI.css" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1371527246551" ignored="false" />
+    <file path="/playbackUI.css" changelist="141b5b39-c3f4-47a8-9f53-a6ff71e1e091" time="1371775585630" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +58,7 @@
       <file leaf-file-name="home.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="45" selection-start="688" selection-end="688" vertical-scroll-proportion="-2.6153846">
+            <state line="28" column="41" selection-start="1006" selection-end="1006" vertical-scroll-proportion="5.0384617">
               <folding />
             </state>
           </provider>
@@ -73,15 +73,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recordCtrl.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/recordCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="40" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="recordUI.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/recordUI.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -91,10 +82,19 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="recordCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/recordCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="58" selection-start="293" selection-end="293" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="playbackUI.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/playbackUI.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="46" selection-start="124" selection-end="124" vertical-scroll-proportion="0.0">
+            <state line="19" column="21" selection-start="403" selection-end="403" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -103,7 +103,7 @@
       <file leaf-file-name="playbackCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/playbackCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="8" selection-start="1131" selection-end="1131" vertical-scroll-proportion="0.0">
+            <state line="70" column="1" selection-start="2572" selection-end="2572" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -112,7 +112,7 @@
       <file leaf-file-name="playbackUI.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/playbackUI.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="98" selection-start="264" selection-end="264" vertical-scroll-proportion="0.12781955">
+            <state line="6" column="211" selection-start="0" selection-end="514" vertical-scroll-proportion="0.19653179">
               <folding />
             </state>
           </provider>
@@ -154,9 +154,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/js/audioDisplay.js" />
-        <option value="$PROJECT_DIR$/js/time.js" />
-        <option value="$PROJECT_DIR$/js/recorderjs/recorderWorker.js" />
         <option value="$PROJECT_DIR$/../Angular/evernote.html" />
         <option value="$PROJECT_DIR$/js/playback.js" />
         <option value="$PROJECT_DIR$/js/main.js" />
@@ -166,9 +163,12 @@
         <option value="$PROJECT_DIR$/recordUI.html" />
         <option value="$PROJECT_DIR$/js/ang.js" />
         <option value="$PROJECT_DIR$/js/filemanager.js" />
-        <option value="$PROJECT_DIR$/js/playbackCtrl.js" />
         <option value="$PROJECT_DIR$/home.html" />
+        <option value="$PROJECT_DIR$/min.angular.js" />
+        <option value="$PROJECT_DIR$/jquery-1.9.1.min.js" />
+        <option value="$PROJECT_DIR$/bootstrap-combined.min.css.js" />
         <option value="$PROJECT_DIR$/css/playbackUI.css" />
+        <option value="$PROJECT_DIR$/js/playbackCtrl.js" />
         <option value="$PROJECT_DIR$/playbackUI.html" />
       </list>
     </option>
@@ -215,20 +215,6 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="Recorder">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Recorder">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="css">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -328,6 +314,7 @@
       <recent name="C:\Users\Trevor\Documents\WebDev\Recorder\img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Trevor\Documents\WebDev\Recorder\libraries" />
       <recent name="C:\Users\Trevor\Documents\WebDev\Recorder\css" />
       <recent name="C:\Users\Trevor\Documents\WebDev\Recorder\js\unused" />
       <recent name="C:\Users\Trevor\Documents\WebDev\Recorder\js" />
@@ -362,7 +349,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -443,26 +430,9 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/time.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="32" selection-start="323" selection-end="323" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Angular/evernote.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="227" column="24" selection-start="12050" selection-end="12050" vertical-scroll-proportion="-10.807693" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DOMCore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="237" column="42" selection-start="4759" selection-end="4761" vertical-scroll-proportion="0.15053764" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/audiomedia.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="53" selection-start="549" selection-end="549" vertical-scroll-proportion="0.1827957">
-          <folding />
-        </state>
+        <state line="20" column="53" selection-start="549" selection-end="549" vertical-scroll-proportion="0.1827957" />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Downloads/spriteIcons/Sprites/index.html">
@@ -482,23 +452,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/ang.js">
+    <entry file="file://$PROJECT_DIR$/css/fileList.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="43" selection-start="2408" selection-end="2408" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="32" column="1" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libraries/min.angular.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="161" column="400" selection-start="91576" selection-end="91576" vertical-scroll-proportion="0.96146786">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/fileList.css">
+    <entry file="file://$PROJECT_DIR$/libraries/jquery-1.9.1.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="1" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0">
+        <state line="2" column="3" selection-start="120" selection-end="120" vertical-scroll-proportion="0.06238532">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libraries/bootstrap-combined.min.css.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="872" column="16083" selection-start="126460" selection-end="126460" vertical-scroll-proportion="0.9599237">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="45" selection-start="688" selection-end="688" vertical-scroll-proportion="-2.6153846">
+        <state line="28" column="41" selection-start="1006" selection-end="1006" vertical-scroll-proportion="5.0384617">
           <folding />
         </state>
       </provider>
@@ -510,13 +496,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/recordCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="40" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/recordUI.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -524,23 +503,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/recordCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="58" selection-start="293" selection-end="293" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ang.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="43" selection-start="2408" selection-end="2408" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/playbackCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="8" selection-start="1131" selection-end="1131" vertical-scroll-proportion="0.0">
+        <state line="70" column="1" selection-start="2572" selection-end="2572" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/playbackUI.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="46" selection-start="124" selection-end="124" vertical-scroll-proportion="0.0">
+        <state line="19" column="21" selection-start="403" selection-end="403" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/playbackUI.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="98" selection-start="264" selection-end="264" vertical-scroll-proportion="0.12781955">
+        <state line="6" column="211" selection-start="0" selection-end="514" vertical-scroll-proportion="0.19653179">
           <folding />
         </state>
       </provider>
