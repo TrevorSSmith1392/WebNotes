@@ -18,4 +18,12 @@
 .playbackAnnotation {
     position: absolute;
     margin-left: 10%;
+    max-width: 60px;
+    overflow: hidden;
+    background-color: lightsteelblue;
+}
+
+.playbackAnnotation:hover{
+    max-width: none;
+    z-index: 1000;
 }

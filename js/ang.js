@@ -3,18 +3,9 @@ var realityIndex = angular.module("RealityIndex", ['editable']).
         $routeProvider.
             when('/', { controller: RecordCtrl, templateUrl:'recordUI.html' }).
             when('/:recordingName', { controller: PlaybackCtrl, templateUrl:'playbackUI.html'}).
-            otherwise({redirectTo:'/'})
+            otherwise({redirectTo:'/404'})
     });
 //make way of modifying relative input time
-
-//need to
-//somehow associate files in display list with both json and everything
-
-//need extract and interface (multiple views)
-
-//interface meaning retrieval
-//should be some way of having a time based, and list based view
-
 
 //export
 

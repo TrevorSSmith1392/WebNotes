@@ -1,4 +1,6 @@
 function RecordCtrl($scope, intermediary, $timeout, $window){
+    initAudio();
+
     $scope.bottom = 120;
     $scope.height = $window.innerHeight - $scope.bottom;
     var scrollSpeed = 30;
