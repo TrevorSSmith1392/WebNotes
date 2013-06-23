@@ -1,60 +1,19 @@
-.icon-folder,.icon-folder-open,.icon-cloud,.icon-mic,.icon-music,.icon-headphones,.icon-volume,.icon-volume2 {
-	
+.arrowUp,.arrowDown,.folder,.folderOpen{
 	display: inline-block;
-	
 	width: 32px;
-	
 	height: 32px;
-	
-	background-image: url(../img/sprites.png);
-	
+	background-image: url('/img/sprites.png');
 	background-repeat: no-repeat;
-
 }
-
-.icon-folder {
-	
+.arrowUp {
 	background-position: 0 0;
-
 }
-
-.icon-folder-open {
-	
+.arrowDown {
 	background-position: -64px 0;
-
 }
-.icon-cloud {
-	
+.folder {
 	background-position: -128px 0;
-
 }
-
-.icon-mic {
-	
-	background-position: -192px 0;
-
-}
-
-.icon-music {
-	
-	background-position: -256px 0;
-
-}
-
-.icon-headphones {
-	
-	background-position: -320px 0;
-
-}
-
-.icon-volume {
-	
-	background-position: -384px 0;
-
-}
-
-.icon-volume2 {
-	
-	background-position: -448px 0;
-
+.folderOpen {
+	background-position: -192px 0 !important;
 }

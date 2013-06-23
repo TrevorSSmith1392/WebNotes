@@ -20,7 +20,10 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
     $scope.recordingName = $routeParams.recordingName;
 
     $scope.recordingAnnotations = '';
-    $scope.clientWidth =  document.getElementById('playbackTimeline').clientWidth;
+    var timeline = document.getElementById('playbackTimeline');
+    $scope.clientWidth =  timeline.clientWidth;
+
+
 
     //wait for file system to be initialized before requesting annotations
     //*hacky
@@ -45,9 +48,10 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
         //audio.currentTime
     };
 
-    $scope.baseTop = $window.innerHeight * .47;
+    $scope.baseTop = getBaseTop(timeline.children[0]);
     $scope.layoutAnnotations = function () {
-        var levels = [-75,50,-25,75,-50,25];
+        var levels = [-100,80,-40,120,-80,40];
+        var annotationLevels = [[],[],[],[],[],[]];
         var currentLevel = 0;
 
         var AddLayoutData = function(levelIndex){
@@ -59,13 +63,51 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
             //why
             AddLayoutData.apply($scope.recordingAnnotations[i], [currentLevel]);
 
+            annotationLevels[currentLevel].push($scope.recordingAnnotations[i]);
+
             if (++currentLevel == levels.length){
                 currentLevel = 0;
             }
         }
+
+        var minSpace = 3;
+        var padding = 7;
+        for (var i = 0; i < annotationLevels.length; i++){
+            var level = annotationLevels[i];
+
+
+            for (var k = 0; k < level.length - 1; k++){
+                var thisOne = level[k];
+                var nextOne = level[k+1];
+
+                var distance = nextOne.position - thisOne.position;
+                var maxWidth = distance - padding;
+                thisOne.maxWidth = maxWidth > minSpace ? maxWidth : minSpace;
+            }
+            level[level.length - 1].maxWidth = 100;
+        }
     }
 
+    function getY(ele){
+        var y=0;
+        while(true){
+            y += ele.offsetTop;
+            if(ele.offsetParent === null){
+                break;
+            }
+            ele = ele.offsetParent;
+        }
+        return y;
+    }
+    function getBaseTop(timeline){
+        return getY(timeline) - 19;
+    }
     $window.onresize = function (e) {
-        $scope.$apply($scope.baseTop = $window.innerHeight * .47);
+        var timeline = document.getElementById('playbackTimeline');
+
+        $scope.clientWidth =  timeline.clientWidth;
+
+        var y = getBaseTop(timeline.children[0]);
+        $scope.$apply($scope.baseTop = y);
     }
 }

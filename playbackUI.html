@@ -2,8 +2,19 @@
 <div id=playbackHeader><a href="#/">Record</a></div>
 <audio loadmetadata id="playbackAudio" ng-src="{{fileURL}}"></audio>
 <div id=playbackZone>
-    <div id=playbackTimeline></div>
+    <div id=playbackTimeline>
+        <div></div>
+    </div>
     <div id="playbackLocation" ng-style="{location: 'something'}">|</div>
-    <div class="playbackAnnotation {{annotation.level}}" ng-repeat="annotation in recordingAnnotations" ng-style="{left: annotation.position + 'px', top: (baseTop + annotation.level) + 'px'}">aaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+    <div class="playbackAnnotation" ng-repeat="annotation in recordingAnnotations" ng-style="{}">
+        <div class="annotationText" ng-style="{left: annotation.position + 'px', top: baseTop + 'px', top: (baseTop + annotation.level) + 'px', maxWidth: annotation.maxWidth + 'px'}">
+              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        </div>
+        <div class="annotationMarker" ng-switch="annotation.level < 0" ng-style="{left: annotation.position + 'px', top: baseTop + 'px'}">
+
+            <img ng-switch-when="true" src="/img/arrow-down.png">
+            <img ng-switch-default src="/img/arrow-up.png" class="bottomArrow">
+        </div>
+    </div>
 
 </div>

@@ -1,4 +1,3 @@
-
 /*might want to define all margins with px using screen width*/
 #playbackTimeline {
     position: absolute;
@@ -9,6 +8,14 @@
     margin-left: 10%;
     top: 40%;
 }
+#playbackTimeline:hover{
+    cursor: crosshair;
+}
+#playbackTimeline div{
+    position: relative;
+    top: 50%;
+    border-top: 1px solid black;
+}
 #playbackLocation {
     position: absolute;
     margin-left: 10%;
@@ -16,14 +23,30 @@
 }
 
 .playbackAnnotation {
-    position: absolute;
-    margin-left: 10%;
-    max-width: 60px;
-    overflow: hidden;
-    background-color: lightsteelblue;
 }
 
 .playbackAnnotation:hover{
-    max-width: none;
     z-index: 1000;
+}
+.playbackAnnotation .annotationText{
+    position: absolute;
+    margin-left: 10%;
+    overflow: hidden;
+    background-color: lightsteelblue;
+    cursor: context-menu;
+}
+.playbackAnnotation .annotationText:hover{
+    max-width: none !important;
+}
+.playbackAnnotation .annotationMarker{
+    position: absolute;
+    margin-left: 10%;
+}
+.annotationMarker img, .annotationMarker .bottomArrow{
+    width: 50%;
+    position: relative;
+    right: 16px;
+}
+.bottomArrow {
+    top: 18px;
 }

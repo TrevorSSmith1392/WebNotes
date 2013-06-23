@@ -25,9 +25,3 @@
     position: absolute;
     left: 0px;
 }
-.folder {
-    background-position: 0 0;
-}
-.folderOpen {
-    background-position: -64px 0 !important;
-}
