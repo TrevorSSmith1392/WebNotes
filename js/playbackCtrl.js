@@ -22,8 +22,7 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
     $scope.recordingAnnotations = '';
     var timeline = document.getElementById('playbackTimeline');
     $scope.clientWidth =  timeline.clientWidth;
-
-
+    $scope.baseTop = getBaseTop(timeline.children[0]);
 
     //wait for file system to be initialized before requesting annotations
     //*hacky
@@ -36,6 +35,7 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
         })
     }
     //*/
+
     $scope.$on('recordingInfoResponse', function () {
         //this all could be simplified using timeout recursively
         $scope.$apply($scope.layoutPlayback);
@@ -45,10 +45,9 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
         //this triggers the event that calls the final layout code, layoutAnnotations();
         $scope.fileURL = intermediary.fileURL;
         $scope.recordingAnnotations = intermediary.annotationResponse;
-        //audio.currentTime
     };
 
-    $scope.baseTop = getBaseTop(timeline.children[0]);
+
     $scope.layoutAnnotations = function () {
         var levels = [-100,80,-40,120,-80,40];
         var annotationLevels = [[],[],[],[],[],[]];
@@ -84,9 +83,26 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
                 var maxWidth = distance - padding;
                 thisOne.maxWidth = maxWidth > minSpace ? maxWidth : minSpace;
             }
-            level[level.length - 1].maxWidth = 100;
+
+            if(level.length){
+                level[level.length - 1].maxWidth = 100;
+            }
         }
     }
+    $scope.playAnnotation = function(annotation) {
+        $scope.audio.controls = true;
+        var time = annotation.offset;
+
+        $scope.audio.currentTime = time;
+        $scope.audio.play();
+    }
+    $scope.pauseAudio = function () {
+        $scope.audio.pause();
+    }
+
+
+
+
 
     function getY(ele){
         var y=0;

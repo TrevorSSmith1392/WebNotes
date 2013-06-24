@@ -77,9 +77,7 @@ function RecordCtrl($scope, intermediary, $timeout, $window){
         var annotation = $scope.annotationField.slice(0, -15);
         $scope.annotationField = '';
 
-        var difference = calculateTimeDifference();
-
-
+        var difference = getAnnotationOffset($scope.currentAnnotationStartTime);
 
         $scope.fileAnnotations.push({note: annotation, offset: difference});
         $scope.shownAnnotations.push({note: annotation, postTime: $scope.currentAnnotationStartTime, pixOffset: 0});

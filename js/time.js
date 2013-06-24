@@ -13,6 +13,11 @@ var calculateTimeDifference = function(){
     return timeDifference;
 }
 
+var getAnnotationOffset = function (annotationStartTime){
+    timeOffset = (annotationStartTime - startTime) / 1000;
+    return timeOffset;
+}
+
 //this might be dead in a moment
 var annotationOffsetTime = function (offsetStart){
     return ((new Date().getTime()) - offsetStart) / 1000;

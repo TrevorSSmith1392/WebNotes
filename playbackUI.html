@@ -5,16 +5,23 @@
     <div id=playbackTimeline>
         <div></div>
     </div>
-    <div id="playbackLocation" ng-style="{location: 'something'}">|</div>
+
+    <div id="playbackLocation" ng-style="{top: baseTop + 'px'}">|</div>
+    <div id="playbackControls">
+        <span id="playbackPause" ng-click="pauseAudio()">Hey hey</span>
+    </div>
+
+
     <div class="playbackAnnotation" ng-repeat="annotation in recordingAnnotations" ng-style="{}">
-        <div class="annotationText" ng-style="{left: annotation.position + 'px', top: baseTop + 'px', top: (baseTop + annotation.level) + 'px', maxWidth: annotation.maxWidth + 'px'}">
-              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+        <div class="annotationText" ng-click="playAnnotation(annotation)" ng-style="{left: annotation.position + 'px', top: baseTop + 'px', top: (baseTop + annotation.level) + 'px', maxWidth: annotation.maxWidth + 'px'}">
+              {{annotation.note}}
         </div>
         <div class="annotationMarker" ng-switch="annotation.level < 0" ng-style="{left: annotation.position + 'px', top: baseTop + 'px'}">
-
             <img ng-switch-when="true" src="/img/arrow-down.png">
             <img ng-switch-default src="/img/arrow-up.png" class="bottomArrow">
         </div>
+
     </div>
 
 </div>

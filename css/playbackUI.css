@@ -37,6 +37,7 @@
 }
 .playbackAnnotation .annotationText:hover{
     max-width: none !important;
+    z-index: 1000;
 }
 .playbackAnnotation .annotationMarker{
     position: absolute;
