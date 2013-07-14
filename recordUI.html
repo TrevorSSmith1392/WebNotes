@@ -13,7 +13,7 @@
             <div class="timeTick" ng-repeat="t in timeTicks" ng-style="{bottom: t.px + 'px'}">-{{t.timePast}}</div>
         </div>
 
-        <div id="currentAnnotationPlaceholder" ng-style="{bottom: (bottom + placeholderOffset) + 'px', visibility: placeholderVisibility}">--</div>
+            <div id="currentAnnotationPlaceholder" ng-style="{bottom: (bottom + placeholderOffset) + 'px', visibility: placeholderVisibility}">--</div>
         <div class="shownNote" ng-repeat="note in shownAnnotations" ng-style="{bottom: (bottom + note.pixOffset) + 'px'}">
             {{note.note}}
         </div>

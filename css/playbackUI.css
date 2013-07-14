@@ -1,3 +1,22 @@
+#radialmenu {
+    z-index: 1001;
+}
+.radialmenu-button {
+    stroke: black;
+    fill: white;
+}
+.radialmenu-button:hover {
+    fill: rgb(100, 100, 255);
+}
+.radialmenu-text {
+    pointer-events: none;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+
+
+
 /*might want to define all margins with px using screen width*/
 #playbackTimeline {
     position: absolute;

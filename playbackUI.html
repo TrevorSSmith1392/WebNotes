@@ -10,11 +10,9 @@
     <div id="playbackControls">
         <span id="playbackPause" ng-click="pauseAudio()">Hey hey</span>
     </div>
-
-
     <div class="playbackAnnotation" ng-repeat="annotation in recordingAnnotations" ng-style="{}">
 
-        <div class="annotationText" ng-click="playAnnotation(annotation)" ng-style="{left: annotation.position + 'px', top: baseTop + 'px', top: (baseTop + annotation.level) + 'px', maxWidth: annotation.maxWidth + 'px'}">
+        <div ng-click="createTagContext(annotation, $index, $event)" class="annotationText" ng-style="{left: annotation.position + 'px', top: baseTop + 'px', top: (baseTop + annotation.level) + 'px', maxWidth: annotation.maxWidth + 'px'}">
               {{annotation.note}}
         </div>
         <div class="annotationMarker" ng-switch="annotation.level < 0" ng-style="{left: annotation.position + 'px', top: baseTop + 'px'}">
@@ -23,5 +21,6 @@
         </div>
 
     </div>
+    <radial-menu></radial-menu>
 
 </div>

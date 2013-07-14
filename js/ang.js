@@ -1,4 +1,4 @@
-var realityIndex = angular.module("RealityIndex", ['editable']).
+var realityIndex = angular.module("RealityIndex", ['editable', 'radialMenu']).
     config(function($routeProvider) {
         $routeProvider.
             when('/', { controller: RecordCtrl, templateUrl:'recordUI.html' }).
@@ -15,6 +15,7 @@ angular.module('editable', []).directive('contenteditable', function() {
     return {
         require: 'ngModel',
         link: function(scope, elm, attrs, ctrl) {
+            e = elm;
             // view -> model
             elm.bind('input', function() {
                 scope.$apply(function() {
@@ -37,6 +38,7 @@ realityIndex.directive('ngKeyup', function() {
     return function(scope, elm, attrs) {
         elm.bind("keyup", function(event) {
 
+            //logic should be more self contained and descriptive, with less global state influence
             //should abstract view toggle a bit
 
             //capture escape for toggling off started state

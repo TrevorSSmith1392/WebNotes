@@ -1,18 +1,15 @@
 realityIndex.directive('loadmetadata', function(){
     //all this should be called after ng-src updates the src, which
     //happens after the filemanager returns the recording info in $on('recordingInfoResponse')
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs, ctrl){
-            element.bind('loadedmetadata', function(){
-                //only do this if ng-src has triggered
-                if(attrs.src){
-                    scope.audio = document.getElementById('playbackAudio');
-                    scope.duration = scope.audio.duration;
-                    scope.$apply(scope.layoutAnnotations());
-                }
-            })
-        }
+    return function(scope, element, attrs){
+        element.bind('loadedmetadata', function(){
+            //only do this if ng-src has triggered
+            if(attrs.src){
+                scope.audio = document.getElementById('playbackAudio');
+                scope.duration = scope.audio.duration;
+                scope.$apply(scope.layoutAnnotations());
+            }
+        })
     }
 })
 
@@ -89,6 +86,8 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
             }
         }
     }
+
+
     $scope.playAnnotation = function(annotation) {
         $scope.audio.controls = true;
         var time = annotation.offset;
@@ -125,5 +124,33 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
 
         var y = getBaseTop(timeline.children[0]);
         $scope.$apply($scope.baseTop = y);
+    }
+
+    $scope.createTagContext = function (annotation, index, event){
+        var functionList = [];
+
+        functionList.push({text: "Play",
+            f: function (){
+                $scope.playAnnotation(annotation);
+        }});
+
+        functionList.push({text: "Edit",
+            f: function(){
+                alert("must make the annotation editable here");
+        }});
+
+        functionList.push({text: "Delete",
+            f: function(){
+                $scope.recordingAnnotations.splice(index, 1);
+        }});
+
+        functionList.push({text: "Move",
+            f: function(){
+                alert("need to get the index, and then attach the position of the specific annotation to the mouse." +
+                    "\n Also need to some how make the old position change appearance, and should create a new" +
+                    "object that shows where the thing will be dropped")
+        }});
+
+        $scope.createRadialMenu(functionList, event);
     }
 }
