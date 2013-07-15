@@ -10,17 +10,21 @@
     <div id="playbackControls">
         <span id="playbackPause" ng-click="pauseAudio()">Hey hey</span>
     </div>
+    {{ recordingAnnotations }}
+
+
     <div class="playbackAnnotation" ng-repeat="annotation in recordingAnnotations" ng-style="{}">
 
-        <div ng-click="createTagContext(annotation, $index, $event)" class="annotationText" ng-style="{left: annotation.position + 'px', top: baseTop + 'px', top: (baseTop + annotation.level) + 'px', maxWidth: annotation.maxWidth + 'px'}">
-              {{annotation.note}}
-        </div>
+        <div ng-click="createTagContext(annotation, $index, $event)" class="annotationText"
+             ng-style="{left: annotation.position + 'px', top: baseTop + 'px', top: (baseTop + annotation.level) + 'px', maxWidth: annotation.maxWidth + 'px'}"
+             contenteditable="{{ annotation.editable }}" keep-original ng-keyup="editAnnotation(annotation)" ng-model="annotation.note"></div>
+
         <div class="annotationMarker" ng-switch="annotation.level < 0" ng-style="{left: annotation.position + 'px', top: baseTop + 'px'}">
             <img ng-switch-when="true" src="/img/arrow-down.png">
             <img ng-switch-default src="/img/arrow-up.png" class="bottomArrow">
         </div>
 
     </div>
-    <radial-menu></radial-menu>
+    <radial-menu/>
 
 </div>

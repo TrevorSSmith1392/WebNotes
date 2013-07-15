@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="libraries/bootstrap-combined.min.css">
     -->
 
+    <script src="js/utils.js"></script>
 
 	<script src="js/recorderjs/recorder.js"></script>
 	<script src="js/audiomedia.js"></script>
@@ -59,7 +60,7 @@
             <ul class="unstyled">
                 <li class="audioFile" ng-repeat="recording in recordings">
                     <div>
-                        <a href="#{{recording.root}}">{{recording.root}}</a>
+                        <a href="#/{{recording.root}}">{{recording.root}}</a>
                         <span class=deleteFile ng-click="deleteFile(recording.wav); deleteFile(recording.json)">X</span>
                     </div>
                     <audio controls src="{{recording.wav.toURL()}}"></audio>

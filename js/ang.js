@@ -3,19 +3,17 @@ var realityIndex = angular.module("RealityIndex", ['editable', 'radialMenu']).
         $routeProvider.
             when('/', { controller: RecordCtrl, templateUrl:'recordUI.html' }).
             when('/:recordingName', { controller: PlaybackCtrl, templateUrl:'playbackUI.html'}).
-            otherwise({redirectTo:'/404'})
+            otherwise({template:'Page not found'});
     });
-//make way of modifying relative input time
-
-//export
-
-//multiple users on same stream (figure out logistics for sharing)
+//ToDo
+    //make way of modifying relative input time
+    //export
+    //multiple users on same stream (figure out logistics for sharing)
 
 angular.module('editable', []).directive('contenteditable', function() {
     return {
         require: 'ngModel',
         link: function(scope, elm, attrs, ctrl) {
-            e = elm;
             // view -> model
             elm.bind('input', function() {
                 scope.$apply(function() {
@@ -28,39 +26,20 @@ angular.module('editable', []).directive('contenteditable', function() {
                 elm.html(ctrl.$viewValue);
             };
 
-            // load init value from DOM
-            ctrl.$setViewValue(elm.html());
+            if (attrs.keepOriginal == undefined){
+                // load init value from DOM
+                ctrl.$setViewValue(elm.html());
+            }
         }
     };
 });
 
-realityIndex.directive('ngKeyup', function() {
+realityIndex.directive('ngKeyup', function($parse) {
     return function(scope, elm, attrs) {
-        elm.bind("keyup", function(event) {
 
-            //logic should be more self contained and descriptive, with less global state influence
-            //should abstract view toggle a bit
-
-            //capture escape for toggling off started state
-            if (event.which == 27){
-                scope.annotationStarted = false;
-                scope.annotationField = '';
-                scope.placeholderVisibility = "hidden";
-            }
-            //check started state for grabbing time
-            else if (!scope.annotationStarted){
-                scope.annotationStarted = true;
-                scope.currentAnnotationStartTime = new Date().getTime();
-                scope.placeholderVisibility = "visible";
-            }
-
-            //else check if enter was pressed
-            else if (event.which === 13) {
-                scope.annotationStarted = false;
-                scope.placeholderVisibility = "hidden";
-                scope.$apply(scope.addAnnotation)
-            }
-        });
+        var cb = $parse(attrs.ngKeyup)(scope);
+        //may want to wrap the callback in $apply
+        elm.bind("keyup", cb);
     };
 });
 

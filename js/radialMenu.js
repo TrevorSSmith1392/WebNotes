@@ -9,6 +9,13 @@ radialMenu = angular.module("radialMenu", []);
             };
         });
     });
+radialMenu.directive("ngR", function(){
+    return function(scope,element,attrs){
+        attrs.$observe("ngR", function(value){
+            attrs.$set("r", parseInt(value) || 20);
+        })
+    }
+});
 
 radialMenu.
     directive("radialMenu", function () {
@@ -24,7 +31,18 @@ radialMenu.
                 });
                 scope.h = function () {scope.visible = false};
 
-                scope.radius = attrs.radius || 100;
+
+                scope.radius = parseInt(attrs.radius) || 65;
+                attrs.$observe("radius", function (radius){
+                    scope.radius = parseInt(radius) || 65;
+                    console.log(scope.radius);
+                });
+                attrs.$observe("innerRadius", function(r){
+                    scope.innerRadius = r;
+                })
+
+
+
                 scope.svgCenterX = scope.radius;
                 scope.svgCenterY = scope.radius;
                 scope.startAngle = 90;
@@ -54,16 +72,16 @@ radialMenu.
 
 
                         for (var i = 1; i <= length; i++){
+                            var wedge = {};
+
+                            wedge.data = list[i];
+
                             var wedgeStartAngle = scope.startAngle + i * scope.wedgeSize;
                             var wedgeEndAngle   = scope.startAngle + i * scope.wedgeSize + scope.wedgeSize;
 
-                            var wedge = {};
-
                             wedge.d = scope.getD(wedgeStartAngle, wedgeEndAngle);
-                            wedge.data = list[i];
 
                             var textAngle = (wedgeEndAngle + wedgeStartAngle) / 2;
-
                             wedge.t = {
                                 x: scope.svgCenterX + (scope.svgCenterX * .65) * Math.cos(Math.PI * textAngle/180),
                                 y: scope.svgCenterY + (scope.svgCenterX * .65) * Math.sin(Math.PI * textAngle/180)
@@ -82,16 +100,17 @@ radialMenu.
                 }
             },
             replace: true,
-            template: '<svg id="{{ classRoot }}" ng-show="visible" ng-style="position" ng-width="{{ radius * 2 }}" ng-height="{{ radius * 2 }}">' +
-                '<g ng-repeat="wedge in wedges">' +
-                '   <path ng-click="wedge.data.f(); h()" class="{{ classRoot }}-button" ng-d="{{wedge.d}}"/>' +
-                '   <text class="{{ classRoot }}-text" ng-dx="{{ wedge.t.x }}" ng-dy="{{ wedge.t.y }}">{{ wedge.data.text }}</text>' +
-                '</g>' +
-                '<g>' +
-                '   <circle ng-click="middleButton.f(); h()" class="{{ classRoot }}-button" r=40 ng-cx="{{ svgCenterX }}" ng-cy="{{ svgCenterY }}"/>' +
-                '   <text class="{{ classRoot }}-text" ng-dx="{{ svgCenterX }}" ng-dy="{{ svgCenterY }}">{{ middleButton.text }}</text>' +
-                '</g>' +
-            '</svg>'
+            template:
+                '<svg id="{{ classRoot }}" ng-show="visible" ng-style="position" ng-width="{{ radius * 2 }}" ng-height="{{ radius * 2 }}">' +
+                    '<g ng-repeat="wedge in wedges">' +
+                    '   <path ng-click="wedge.data.f(); h()" class="{{ classRoot }}-button" ng-d="{{wedge.d}}"/>' +
+                    '   <text class="{{ classRoot }}-text" ng-dx="{{ wedge.t.x }}" ng-dy="{{ wedge.t.y }}">{{ wedge.data.text }}</text>' +
+                    '</g>' +
+                    '<g>' +
+                    '   <circle ng-click="middleButton.f(); h()" class="{{ classRoot }}-button" ng-r="{{ innerRadius }}" ng-cx="{{ svgCenterX }}" ng-cy="{{ svgCenterY }}"/>' +
+                    '   <text class="{{ classRoot }}-text" ng-dx="{{ svgCenterX }}" ng-dy="{{ svgCenterY }}">{{ middleButton.text }}</text>' +
+                    '</g>' +
+                '</svg>'
         }
     })
 

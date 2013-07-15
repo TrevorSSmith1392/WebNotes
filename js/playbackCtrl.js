@@ -13,7 +13,30 @@ realityIndex.directive('loadmetadata', function(){
     }
 })
 
-function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
+function PlaybackCtrl ($scope, $routeParams, intermediary, $window, $location){
+    $scope.editAnnotation = function(annotation){
+        var old = annotation.note;
+        //Edit Key Dispatch
+        return function(event){
+            //Escape
+            if (event.which == 27){
+                annotation.note = old;
+                annotation.editable = "false";
+                $scope.$apply();
+            }
+            //Enter
+            else if (event.which === 13) {
+                annotation.note = parseContentFromHtml(annotation.note);
+
+                old = annotation.note;
+                annotation.editable = "false";
+                $scope.$apply();
+            }
+        }
+    }
+
+
+    //should handle case when recording is not found
     $scope.recordingName = $routeParams.recordingName;
 
     $scope.recordingAnnotations = '';
@@ -54,6 +77,9 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
             var timeProportion = this.offset / $scope.audio.duration;
             this.position = timeProportion * $scope.clientWidth;
             this.level = levels[levelIndex];
+
+            //this object needs a new name
+            this.editable = "false";
         }
         for (var i = 0; i < $scope.recordingAnnotations.length; i++){
             //why
@@ -127,30 +153,35 @@ function PlaybackCtrl ($scope, $routeParams, intermediary, $timeout, $window){
     }
 
     $scope.createTagContext = function (annotation, index, event){
-        var functionList = [];
+        if (annotation.editable == "false"){
 
-        functionList.push({text: "Play",
-            f: function (){
-                $scope.playAnnotation(annotation);
-        }});
 
-        functionList.push({text: "Edit",
-            f: function(){
-                alert("must make the annotation editable here");
-        }});
+            var functionList = [];
 
-        functionList.push({text: "Delete",
-            f: function(){
-                $scope.recordingAnnotations.splice(index, 1);
-        }});
+            functionList.push({text: "Play",
+                f: function (){
+                    $scope.playAnnotation(annotation);
+            }});
 
-        functionList.push({text: "Move",
-            f: function(){
-                alert("need to get the index, and then attach the position of the specific annotation to the mouse." +
-                    "\n Also need to some how make the old position change appearance, and should create a new" +
-                    "object that shows where the thing will be dropped")
-        }});
+            functionList.push({text: "Edit",
+                f: function(){
+                    annotation.editable = "true";
+                    setTimeout(function() {event.target.focus()}, 0);
+            }});
 
-        $scope.createRadialMenu(functionList, event);
+            functionList.push({text: "Delete",
+                f: function(){
+                    $scope.recordingAnnotations.splice(index, 1);
+            }});
+
+            functionList.push({text: "Move",
+                f: function(){
+                    alert("need to get the index, and then attach the position of the specific annotation to the mouse." +
+                        "\n Also need to some how make the old position change appearance, and should create a new" +
+                        "object that shows where the thing will be dropped")
+            }});
+
+            $scope.createRadialMenu(functionList, event);
+        }
     }
 }

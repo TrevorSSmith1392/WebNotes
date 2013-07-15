@@ -1,6 +1,37 @@
 function RecordCtrl($scope, intermediary, $timeout, $window){
     initAudio();
 
+    $scope.annotationKeyDispatch = function(event){
+
+        //this should modify global state less probably
+
+        //should abstract view toggle a bit
+
+        //Escape
+        if (event.which == 27){
+            $scope.annotationStarted = false;
+            $scope.annotationField = '';
+            $scope.placeholderVisibility = "hidden";
+        }
+        //Check started state for grabbing time
+        else if (!$scope.annotationStarted){
+            $scope.annotationStarted = true;
+            $scope.currentAnnotationStartTime = new Date().getTime();
+            $scope.placeholderVisibility = "visible";
+        }
+
+        //Else check if enter was pressed
+        else if (event.which === 13) {
+            $scope.annotationStarted = false;
+            $scope.placeholderVisibility = "hidden";
+            $scope.$apply($scope.addAnnotation)
+        }
+    }
+
+
+
+
+
     $scope.bottom = 120;
     $scope.height = $window.innerHeight - $scope.bottom;
     var scrollSpeed = 30;
@@ -51,7 +82,7 @@ function RecordCtrl($scope, intermediary, $timeout, $window){
 
             audioRecorder.record();
 
-            setTimeout(function() {document.getElementById("notezone").focus()}, 250);
+            setTimeout(function() {document.getElementById("notezone").focus()}, 0);
         }
     }
     $scope.writeFileAnnotations = function(){
@@ -73,8 +104,8 @@ function RecordCtrl($scope, intermediary, $timeout, $window){
     $scope.placeholderVisibility = "hidden";
 
     $scope.addAnnotation = function () {
+        var annotation = parseContentFromHtml($scope.annotationField);
 
-        var annotation = $scope.annotationField.slice(0, -15);
         $scope.annotationField = '';
 
         var difference = getAnnotationOffset($scope.currentAnnotationStartTime);

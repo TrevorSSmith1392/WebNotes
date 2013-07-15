@@ -18,8 +18,8 @@
             {{note.note}}
         </div>
 
-        <div id=notezone contenteditable="true" ng-show="isRecording" ng-style="{bottom: bottom + 'px'}"
-             ng-keyup ng-model="annotationField">
+        <div id=notezone contenteditable ng-show="isRecording" ng-style="{bottom: bottom + 'px'}"
+             ng-keyup="annotationKeyDispatch" ng-model="annotationField">
         </div>
 
     </div>
